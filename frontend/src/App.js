@@ -1,10 +1,16 @@
 import './App.css';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import LoginRegister from './screens/LoginRegister/LoginRegister';
+import MyJournal from './screens/MyJournal/MyJournal';
 
 function App() {
   return (
-    <div className="App">
-      <p>My Spiritual Journal</p>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" Component={LoginRegister}/>
+        <Route path="/myjournal" Component={MyJournal} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
