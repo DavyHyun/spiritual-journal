@@ -10,12 +10,18 @@ const MyJournal = () => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+  useEffect(() => {
+    if (!userInfo) {
+      nav("/");
+    }
+  }, [userInfo, nav])
+
   const logoutHandle = async() => {
     dispatch(logout());
     nav("/");
   }
 
- 
+  
   return (
     <div>
       <button onClick={() => logoutHandle()}>logout for now</button>
