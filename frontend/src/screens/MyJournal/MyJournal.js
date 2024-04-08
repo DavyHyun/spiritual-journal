@@ -2,6 +2,7 @@ import React, {useEffect} from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../../actions/userActions";
+import Header from '../../components/Header/Header';
 
 const MyJournal = () => {
 
@@ -24,6 +25,7 @@ const MyJournal = () => {
   
   return (
     <div>
+      {/* <Header /> */}
       <button onClick={() => logoutHandle()}>logout for now</button>
     </div>
   )

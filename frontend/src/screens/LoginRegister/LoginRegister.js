@@ -5,7 +5,7 @@ import ErrorMessage from "../../components/ErrorMessage";
 import Loading from "../../components/Loading";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { login } from "../../actions/userActions";
+import { login, register } from "../../actions/userActions";
 
 const LoginRegister = () => {
 
@@ -29,20 +29,24 @@ const LoginRegister = () => {
         dispatch(login(username, password));
     }
 
+    const registerHandle = async () => {
+        dispatch(register(username, password));
+    }
+
   return (
     <div className="container">
         <div className="loginBox">
             <p className="titleText">My Spiritual Journal</p>
             <div className='entryBox'>
                 <input className="formInput" type="text" value={username} placeholder="Username" onChange={(e) => setUsername(e.target.value)}/>
-                <input className="formInput" type="text" value={password} placeholder="Password" onChange={(e) => setPassword(e.target.value)}/>
+                <input className="formInput" type="password" value={password} placeholder="Password" onChange={(e) => setPassword(e.target.value)}/>
             </div>
             <div className="buttonsContainer">
                 <div className="button" onClick={() => loginHandle()}>
-                    <p>Login</p>
+                    Login
                 </div>
-                <div className="button">
-                    <p>Register</p>
+                <div className="button" onClick={() => registerHandle()}>
+                    Register
                 </div>
             </div>
         </div>

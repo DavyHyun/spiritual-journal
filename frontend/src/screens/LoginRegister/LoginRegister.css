@@ -17,7 +17,7 @@
     flex-direction: column;
     align-items: center;
     width: 350px;
-    margin-bottom: 15%
+    margin-bottom: 10%
 }
 
 .entryBox {
@@ -32,8 +32,8 @@
     display: flex;
     justify-content: space-between;
     flex-direction: row; 
-    width: 72%;
-    margin-top: 8%;
+    width: 70%;
+    margin-top: 10%;
 }
 
 /* TEXT */
@@ -41,30 +41,29 @@
     font-size: 32px;
     text-align: center;
     font-weight: 100;
+    margin-bottom: 3%;
 }
 
 .formInput {
     height: 30px;
-    margin-top: 2%;
+    margin-top: 8%;
     border:none;
     border-bottom: 1px solid gray;
-    padding: 2%;
+    padding-bottom: 3%;
+    padding-left: 2%;
     width: 70%; 
     outline: none;
+    font-size: 14px;
 }
 
 .button {
-    width: 40%;
+    width: 42%;
     border: 1px solid gray;
-    height: 35px;
+    height: 37px;
     justify-content: center;
     align-items: center;
     display: flex;
-
-    >p {
-        font-size: 15px;
-    }
-
+    font-size: 14px;
 }
 
 .button:hover {
