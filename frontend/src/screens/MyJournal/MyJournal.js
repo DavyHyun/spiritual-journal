@@ -17,16 +17,15 @@ const MyJournal = () => {
     }
   }, [userInfo, nav])
 
-  const logoutHandle = async() => {
-    dispatch(logout());
-    nav("/");
-  }
+  // const logoutHandle = async() => {
+  //   dispatch(logout());
+  //   nav("/");
+  // }
 
   
   return (
     <div>
-      {/* <Header /> */}
-      <button onClick={() => logoutHandle()}>logout for now</button>
+     
     </div>
   )
 }
