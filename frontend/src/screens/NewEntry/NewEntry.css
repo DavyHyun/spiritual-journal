@@ -7,44 +7,44 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-size: 120vh;
+    background-size: 125vh;
 }
 
 .notebookContain {
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   width: 450px;
-   margin-left: 80px;
-   height: 84%;
-   flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 400px;
+    margin-left: 90px;
+    height: 84%;
+    flex-direction: column;
+    /* background-color: blue; */
 }
 
-
 .versesEntry {
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   flex-direction: row;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
 }
 
 input::placeholder {
-    color: #C1C1C1;
+    color: #C1C1C1
 }
+
 textarea::placeholder {
-    color: #C1C1C1;
+    color: #C1C1C1
 }
 
 .submitContainer {
     display: flex;
     justify-content: space-between;
-    flex-direction: row; 
+    flex-direction: row;
     width: 60%;
     margin-top: 20%;
 }
 
-
-.submitButton1 {
+.addToButton {
     width: 47%;
     border: 1px solid gray;
     height: 37px;
@@ -53,8 +53,9 @@ textarea::placeholder {
     display: flex;
     font-size: 14px;
 }
-.submitButton2 {
-    width: 43%;
+
+.postButton {
+    width: 40%;
     border: 1px solid gray;
     height: 37px;
     justify-content: center;
@@ -63,11 +64,12 @@ textarea::placeholder {
     font-size: 14px;
 }
 
-.submitButton1:hover {
+.addToButton:hover {
     cursor: pointer;
-    transform: scale(1.05)
+    transform: scale(1.05);
 }
-.submitButton2:hover {
+
+.postButton:hover {
     cursor: pointer;
-    transform: scale(1.05)
+    transform: scale(1.05);
 }
