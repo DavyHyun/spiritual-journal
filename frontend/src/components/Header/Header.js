@@ -9,17 +9,18 @@ import { useNavigate } from "react-router-dom";
 import './Header.css'
 import { logout } from "../../actions/userActions";
 import logo from "../../misc/images/loginNotebook.png"
+import { FiLogOut } from "react-icons/fi";
 
 const Header = () => {
   const navigate = useNavigate();
-//   const dispatch = useDispatch();
+  const dispatch = useDispatch();
 //   const userLogin = useSelector((state) => state.userLogin);
 //   const { userInfo } = userLogin;
 
-//   const logoutHandler = () => {
-//     dispatch(logout());
-//     navigate("/");
-//   };
+  const logoutHandler = () => {
+    dispatch(logout());
+    navigate("/");
+  };
 
   return (
    <Navbar expand="lg">
@@ -36,11 +37,11 @@ const Header = () => {
         <Navbar.Collapse id="navbarScroll">
           <Nav style={{ maxHeight: "100px" }} navbarScroll>
             <Nav.Link href="/newentry">+ new entry</Nav.Link>
-            {/* <Nav.Link href="/newentry">Logout</Nav.Link> */}
-            {/* <NavDropdown title="David Hyun" id="navbarScrollingDropdown">
-              <NavDropdown.Item href="#action3">My Profile</NavDropdown.Item>
-              <NavDropdown.Divider />
-            </NavDropdown> */}
+            <Nav.Link onClick={() => logoutHandler()}>
+              <FiLogOut style={{
+                marginLeft: '10%'
+               }}/>
+            </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
