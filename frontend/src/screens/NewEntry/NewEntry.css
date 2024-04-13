@@ -9,3 +9,65 @@
     align-items: center;
     background-size: 120vh;
 }
+
+.notebookContain {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   width: 450px;
+   margin-left: 80px;
+   height: 84%;
+   flex-direction: column;
+}
+
+
+.versesEntry {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-direction: row;
+}
+
+input::placeholder {
+    color: #C1C1C1;
+}
+textarea::placeholder {
+    color: #C1C1C1;
+}
+
+.submitContainer {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row; 
+    width: 60%;
+    margin-top: 20%;
+}
+
+
+.submitButton1 {
+    width: 47%;
+    border: 1px solid gray;
+    height: 37px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    font-size: 14px;
+}
+.submitButton2 {
+    width: 43%;
+    border: 1px solid gray;
+    height: 37px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    font-size: 14px;
+}
+
+.submitButton1:hover {
+    cursor: pointer;
+    transform: scale(1.05)
+}
+.submitButton2:hover {
+    cursor: pointer;
+    transform: scale(1.05)
+}
