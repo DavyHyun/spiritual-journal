@@ -16,7 +16,7 @@ const PORT = process.env.PORT || 3001;
 app.use("/api/users", userRoutes);
 
 app.use(notFound);
-app.use(errorHandler);
+app.use(errorHandler);   
 
 
 app.listen(PORT, console.log(`Server started on PORT ${PORT}`));
