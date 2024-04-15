@@ -28,6 +28,13 @@
     flex-direction: row;
 }
 
+.verseContainer {
+    max-height: 100px;
+    width: 90%;
+    overflow-y: scroll;
+    font-size: 13px;
+}
+
 input::placeholder {
     color: #C1C1C1
 }
@@ -41,11 +48,12 @@ textarea::placeholder {
     justify-content: space-between;
     flex-direction: row;
     width: 60%;
-    margin-top: 20%;
+    margin-top: 10%;
+    /* background-color: blue; */
 }
 
 .addToButton {
-    width: 47%;
+    width: 50%;
     border: 1px solid gray;
     height: 37px;
     justify-content: center;
