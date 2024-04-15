@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { createJournalAction } from "../../actions/journalActions";
 import { useNavigate } from "react-router-dom";
 import { AiOutlineDown } from "react-icons/ai";
+import Loading from "../../components/Loading";
+import ErrorMessage from "../../components/ErrorMessage";
 import "./NewEntry.css";
 
 const NewEntry = () => {
@@ -10,6 +13,31 @@ const NewEntry = () => {
   const [book, setBook] = useState("");
   const [chapter, setChapter] = useState("");
   const [verses, setVerses] = useState("");
+  const [reflection, setReflection] = useState("");
+
+  const dispatch = useDispatch();
+  const nav = useNavigate();
+
+  const journalCreate = useSelector((state) => state.journalCreate);
+  const { loading, error, journal } = journalCreate;
+
+  const resetHandler = () => {
+    setBook("");
+    setChapter("");
+    setVerses("");
+    setVerseText("");
+    setReflection("");
+  };
+
+  const submitHandler = () => {
+    const verse = book + " " + chapter + ":" + verses;
+    dispatch(createJournalAction(verse, verseText, reflection));
+
+    resetHandler();
+    nav("/myjournal");
+  };
+
+  useEffect(() => {}, []);
 
   useEffect(() => {
     const fetchVerseText = async () => {
@@ -40,6 +68,8 @@ const NewEntry = () => {
 
   return (
     <div className="containerEntry">
+      {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
+      {loading && <Loading size={50} />}
       <div className="notebookContain">
         {invalid ? (
           <p
@@ -108,6 +138,9 @@ const NewEntry = () => {
         <textarea
           type="text"
           placeholder="Write reflection here..."
+          onChange={(e) => {
+            setReflection(e.target.value);
+          }}
           style={{
             fontSize: "15px",
             height: "50%",
@@ -126,7 +159,7 @@ const NewEntry = () => {
               }}
             />
           </div>
-          <div className="postButton" onClick={() => {}}>
+          <div className="postButton" onClick={() => submitHandler()}>
             Post
           </div>
         </div>
