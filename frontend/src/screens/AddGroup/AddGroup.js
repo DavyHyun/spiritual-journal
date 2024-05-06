@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { createGroup, addToGroup } from "../../actions/groupActions";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../../actions/userActions";
 import Sidebar from "../../components/Sidebar/Sidebar";
@@ -11,6 +12,10 @@ const AddGroup = () => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+  const [createN, setCreateN] = useState("");
+  const [createC, setCreateC] = useState("");
+  const [addC, setAddC] = useState("");
+
   useEffect(() => {
     if (!userInfo) {
       nav("/");
@@ -21,6 +26,18 @@ const AddGroup = () => {
   //   dispatch(logout());
   //   nav("/");
   // }
+
+  const groupHandle = async () => {
+    if (createC.length > 0 && addC.length > 0) {
+      alert("Please Enter One or the Other");
+    } else if (createC.length > 0) {
+      dispatch(createGroup(createN, createC));
+    } else {
+      dispatch(addToGroup(addC));
+    }
+
+    window.location.reload();
+  };
 
   return (
     <div
@@ -41,11 +58,20 @@ const AddGroup = () => {
         }}
       >
         <div className="section">
-          <p className="title">Create Code</p>
+          <p className="title">Create Group</p>
           <input
             className="formInput"
             type="text"
-            placeholder="Enter Code Here..."
+            placeholder="Group Name"
+            value={createN}
+            onChange={(e) => setCreateN(e.target.value)}
+          />
+          <input
+            className="formInput"
+            type="text"
+            placeholder="Group Code"
+            value={createC}
+            onChange={(e) => setCreateC(e.target.value)}
           />
         </div>
         <div className="section">
@@ -53,10 +79,12 @@ const AddGroup = () => {
           <input
             className="formInput"
             type="text"
-            placeholder="Enter Code Here..."
+            placeholder="Group Code"
+            value={addC}
+            onChange={(e) => setAddC(e.target.value)}
           />
         </div>
-        <div className="buttonGroup" onClick={() => {}}>
+        <div className="buttonGroup" onClick={() => groupHandle()}>
           Enter
         </div>
       </div>

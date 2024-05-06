@@ -6,12 +6,20 @@ import {
 import { thunk } from "redux-thunk";
 import { userLoginReducer, userRegisterReducer } from "./reducers/userReducers";
 import { journalCreateReducer } from "./reducers/journalReducer";
+import {
+  groupCreateReducer,
+  groupAddReducer,
+  groupListReducer,
+} from "./reducers/groupReducer";
 import { composeWithDevTools } from "@redux-devtools/extension";
 
 const reducer = combineReducers({
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
   journalCreate: journalCreateReducer,
+  groupCreate: groupCreateReducer,
+  groupAdd: groupAddReducer,
+  groupList: groupListReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")

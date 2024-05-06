@@ -1,21 +1,8 @@
-import React from "react";
+import React, { useEffect, ueseState } from "react";
 import "./Sidebar.css";
 import { NavLink } from "react-router-dom";
-
-const groups = [
-  {
-    id: 1,
-    name: "Family",
-  },
-  {
-    id: 2,
-    name: "Small Group",
-  },
-  {
-    id: 3,
-    name: "The Boys",
-  },
-];
+import { useDispatch, useSelector } from "react-redux";
+import { groupList } from "../../actions/groupActions";
 
 const Section = ({ title, link }) => {
   return (
@@ -46,6 +33,17 @@ const Section = ({ title, link }) => {
 };
 
 const Sidebar = () => {
+  const dispatch = useDispatch();
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
+  const group = useSelector((state) => state.groupList);
+  const { loading, groups, error } = group;
+
+  useEffect(() => {
+    dispatch(groupList());
+  }, [dispatch, userInfo]);
   return (
     <div
       style={{
@@ -86,8 +84,8 @@ const Sidebar = () => {
           }}
         />
       </div>
-      {groups.map((group) => (
-        <Section title={group.name} link={`/mygroups/${group.id}`} />
+      {groups?.map((group) => (
+        <Section title={group.groupName} link={`/mygroups/${group._id}`} />
       ))}
       <Section title="+ Add New" link="/addgroup" />
     </div>
