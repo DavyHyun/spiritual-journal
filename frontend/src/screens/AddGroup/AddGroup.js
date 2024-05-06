@@ -56,7 +56,7 @@ const AddGroup = () => {
             placeholder="Enter Code Here..."
           />
         </div>
-        <div className="button" onClick={() => {}}>
+        <div className="buttonGroup" onClick={() => {}}>
           Enter
         </div>
       </div>

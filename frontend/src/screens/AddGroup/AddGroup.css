@@ -23,7 +23,7 @@
   font-size: 14px;
 }
 
-.button {
+.buttonGroup {
   width: 10%;
   border: 1px solid gray;
   height: 37px;
@@ -34,7 +34,7 @@
   margin-top: 5%;
 }
 
-.button:hover {
+.buttonGroup:hover {
   cursor: pointer;
   transform: scale(1.05);
 }
