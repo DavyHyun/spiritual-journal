@@ -7,7 +7,7 @@ import Header from "../../components/Header/Header";
 import journals from "../../data.js";
 import Sidebar from "../../components/Sidebar/Sidebar";
 
-const MyJournal = () => {
+const GroupPage = () => {
   const nav = useNavigate();
   const dispatch = useDispatch();
   const userLogin = useSelector((state) => state.userLogin);
@@ -30,7 +30,6 @@ const MyJournal = () => {
         display: "flex",
         justifyContent: "center",
         flexDirection: "row",
-        // alignItems: "center",
       }}
     >
       <Sidebar />
@@ -43,7 +42,7 @@ const MyJournal = () => {
           flex: 0.8,
         }}
       >
-        {journals.reverse().map((note) => (
+        {journals?.reverse().map((note) => (
           <Accordion defaultActiveKey={["0"]} style={{ width: "90%" }}>
             <Accordion.Item eventkey="0">
               <Accordion.Header
@@ -77,4 +76,4 @@ const MyJournal = () => {
   );
 };
 
-export default MyJournal;
+export default GroupPage;

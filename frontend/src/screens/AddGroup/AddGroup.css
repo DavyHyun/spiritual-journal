@@ -1,0 +1,40 @@
+.section {
+  margin-top: 4%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 35%;
+}
+
+.title {
+  font-size: 22px;
+  margin-bottom: -1%;
+}
+
+.formInput {
+  height: 30px;
+  border: none;
+  border-bottom: 1px solid gray;
+  padding-bottom: 3%;
+  padding-left: 2%;
+  width: 70%;
+  outline: none;
+  font-size: 14px;
+}
+
+.button {
+  width: 10%;
+  border: 1px solid gray;
+  height: 37px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  font-size: 14px;
+  margin-top: 5%;
+}
+
+.button:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+}
