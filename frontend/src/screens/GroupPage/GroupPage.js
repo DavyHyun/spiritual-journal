@@ -80,7 +80,7 @@ const GroupPage = () => {
                 >
                   <span style={{ width: "85%", textAlign: "left" }}>
                     {note.verse}
-                    {note.title ? ` | ${note.title}` : ""}
+                    {note.title ? ` | ${note.title}` : ""} | {note.authorName}
                   </span>
                   <span style={{ fontSize: "12px" }}>
                     {formatDate(note.createdAt)}

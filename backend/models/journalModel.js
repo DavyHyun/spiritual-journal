@@ -23,6 +23,11 @@ const journalSchema = mongoose.Schema(
       ref: "users",
     },
 
+    authorName: {
+      type: String,
+      required: true,
+    },
+
     isPersonal: {
       type: Boolean,
       require: false,
