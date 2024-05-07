@@ -17,7 +17,8 @@ import {
 } from "../constants/journalConstants";
 
 export const createJournalAction =
-  (verse, passage, content) => async (dispatch, getState) => {
+  (verse, passage, content, title, selectedGroups) =>
+  async (dispatch, getState) => {
     try {
       dispatch({
         type: JOURNAL_CREATE_REQUEST,
@@ -37,6 +38,8 @@ export const createJournalAction =
           verse: verse,
           passage: passage,
           content: content,
+          title: title,
+          groups: selectedGroups,
         }),
       };
 

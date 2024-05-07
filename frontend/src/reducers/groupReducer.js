@@ -38,7 +38,7 @@ export const groupAddReducer = (state = {}, action) => {
   }
 };
 
-export const groupListReducer = (state = {}, action) => {
+export const groupListReducer = (state = { groups: [] }, action) => {
   switch (action.type) {
     case GROUP_LIST_REQUEST:
       return { loading: true };

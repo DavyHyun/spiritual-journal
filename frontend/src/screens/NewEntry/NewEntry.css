@@ -1,83 +1,84 @@
 .containerEntry {
-    background-image: url(../../misc/images/entryNotebook.png);
-    width: 100%;
-    height: calc(100vh);
-    background-position: center;
-    background-repeat: no-repeat;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-size: 125vh;
+  background-image: url(../../misc/images/entryNotebook.png);
+  width: 100%;
+  height: calc(100vh);
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-size: 125vh;
 }
 
 .notebookContain {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 400px;
-    margin-left: 90px;
-    height: 84%;
-    flex-direction: column;
-    /* background-color: blue; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 400px;
+  margin-left: 90px;
+  height: 84%;
+  flex-direction: column;
+  /* background-color: blue; */
 }
 
 .versesEntry {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
 }
 
 .verseContainer {
-    max-height: 100px;
-    width: 90%;
-    overflow-y: scroll;
-    font-size: 13px;
+  max-height: 100px;
+  width: 90%;
+  overflow-y: scroll;
+  font-size: 13px;
 }
 
 input::placeholder {
-    color: #C1C1C1
+  color: #c1c1c1;
 }
 
 textarea::placeholder {
-    color: #C1C1C1
+  color: #c1c1c1;
 }
 
 .submitContainer {
-    display: flex;
-    justify-content: space-between;
-    flex-direction: row;
-    width: 60%;
-    margin-top: 10%;
-    /* background-color: blue; */
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  width: 60%;
+  margin-top: 10%;
+  margin-bottom: 7%;
+  /* background-color: blue; */
 }
 
 .addToButton {
-    width: 50%;
-    border: 1px solid gray;
-    height: 37px;
-    justify-content: center;
-    align-items: center;
-    display: flex;
-    font-size: 14px;
+  width: 50%;
+  border: 1px solid gray;
+  height: 37px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  font-size: 14px;
 }
 
 .postButton {
-    width: 40%;
-    border: 1px solid gray;
-    height: 37px;
-    justify-content: center;
-    align-items: center;
-    display: flex;
-    font-size: 14px;
+  width: 40%;
+  border: 1px solid gray;
+  height: 37px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  font-size: 14px;
 }
 
 .addToButton:hover {
-    cursor: pointer;
-    transform: scale(1.05);
+  cursor: pointer;
+  transform: scale(1.05);
 }
 
 .postButton:hover {
-    cursor: pointer;
-    transform: scale(1.05);
+  cursor: pointer;
+  transform: scale(1.05);
 }

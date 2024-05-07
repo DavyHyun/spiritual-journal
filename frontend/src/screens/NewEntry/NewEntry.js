@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { AiOutlineDown } from "react-icons/ai";
 import Loading from "../../components/Loading";
 import ErrorMessage from "../../components/ErrorMessage";
+import { groupList } from "../../actions/groupActions";
 import "./NewEntry.css";
 
 const NewEntry = () => {
@@ -14,6 +15,9 @@ const NewEntry = () => {
   const [chapter, setChapter] = useState("");
   const [verses, setVerses] = useState("");
   const [reflection, setReflection] = useState("");
+  const [title, setTitle] = useState("");
+  const [selectedGroups, setSelectedGroups] = useState([]);
+  const [showGroups, setShowGroups] = useState(false);
 
   const dispatch = useDispatch();
   const nav = useNavigate();
@@ -21,25 +25,47 @@ const NewEntry = () => {
   const journalCreate = useSelector((state) => state.journalCreate);
   const { loading, error, journal } = journalCreate;
 
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+  const group = useSelector((state) => state.groupList);
+  const { loadingG, groups } = group;
+
   const resetHandler = () => {
     setBook("");
     setChapter("");
     setVerses("");
     setVerseText("");
     setReflection("");
+    setTitle("");
   };
 
   const submitHandler = () => {
     const verse = book + " " + chapter + ":" + verses;
-    dispatch(createJournalAction(verse, verseText, reflection));
+    dispatch(
+      createJournalAction(verse, verseText, reflection, title, selectedGroups)
+    );
 
     resetHandler();
     nav("/myjournal");
   };
 
-  useEffect(() => {}, []);
+  const handleGroupSelect = (groupId) => {
+    setSelectedGroups((prev) => {
+      if (prev.includes(groupId)) {
+        return prev.filter((id) => id !== groupId); // Deselect the group
+      } else {
+        return [...prev, groupId]; // Select the group
+      }
+    });
+  };
+
+  const toggleGroups = () => {
+    console.log(groups);
+    setShowGroups((prev) => !prev); // Toggle the visibility of the groups list
+  };
 
   useEffect(() => {
+    dispatch(groupList());
     const fetchVerseText = async () => {
       if (verses !== "" && book !== "" && chapter !== "" && !isNaN(chapter)) {
         try {
@@ -64,13 +90,32 @@ const NewEntry = () => {
     };
 
     fetchVerseText();
-  }, [book, chapter, verses]);
+  }, [book, chapter, verses, dispatch, userInfo]);
+
+  if (loadingG) {
+    return <Loading />;
+  }
 
   return (
     <div className="containerEntry">
       {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
       {loading && <Loading size={50} />}
       <div className="notebookContain">
+        <input
+          type="text"
+          placeholder="Title..."
+          style={{
+            fontSize: "20px",
+            width: "80%",
+            border: "none",
+            outline: "none",
+            marginRight: "40px",
+            marginBottom: "2%",
+          }}
+          onChange={(e) => {
+            setTitle(e.target.value);
+          }}
+        />
         {invalid ? (
           <p
             style={{
@@ -151,14 +196,41 @@ const NewEntry = () => {
           }}
         />
         <div className="submitContainer">
-          <div className="addToButton" onClick={() => {}}>
+          <div className="addToButton" onClick={toggleGroups}>
             Add To
-            <AiOutlineDown
-              style={{
-                marginLeft: "20%",
-              }}
-            />
           </div>
+          {showGroups ? (
+            <div
+              style={{
+                position: "absolute",
+                width: "150px",
+                marginTop: "3%",
+                border: "1px solid black",
+                backgroundColor: "white",
+                padding: "8px",
+                zIndex: "999",
+              }}
+            >
+              {groups.map((group) => (
+                <div
+                  key={group._id}
+                  onClick={() => handleGroupSelect(group._id)}
+                  style={{
+                    backgroundColor: selectedGroups.includes(group._id)
+                      ? "#D9D9D9"
+                      : "transparent",
+                    cursor: "pointer",
+                    fontSize: "13px",
+                    marginTop: "4%",
+                  }}
+                >
+                  {group.groupName}
+                </div>
+              ))}
+            </div>
+          ) : (
+            <></>
+          )}
           <div className="postButton" onClick={() => submitHandler()}>
             Post
           </div>

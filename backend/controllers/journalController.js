@@ -2,7 +2,7 @@ const Journal = require("../models/journalModel");
 const asyncHandler = require("express-async-handler");
 
 const createJournal = asyncHandler(async (req, res) => {
-  const { verse, passage, content } = req.body;
+  const { verse, passage, content, title, groups } = req.body;
 
   if (!verse || !passage || !content) {
     res.status(400);
@@ -13,6 +13,8 @@ const createJournal = asyncHandler(async (req, res) => {
       verse,
       passage,
       content,
+      title,
+      groups,
     });
     const createdJournal = await journal.save();
 

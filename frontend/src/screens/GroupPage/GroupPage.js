@@ -93,7 +93,7 @@ const GroupPage = () => {
                       marginTop: "1%",
                     }}
                   >
-                    {note.passage}
+                    "{note.passage}"
                   </p>
                   <p
                     style={{

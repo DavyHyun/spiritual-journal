@@ -27,6 +27,10 @@ const journalSchema = mongoose.Schema(
       type: Boolean,
       require: false,
     },
+    title: {
+      type: String,
+      require: false,
+    },
 
     groups: [
       {

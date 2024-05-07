@@ -55,7 +55,7 @@ const MyJournal = () => {
       <div
         style={{
           display: "flex",
-          justifyContent: "center",
+          justifyContent: "flex-start",
           flexDirection: "column",
           alignItems: "center",
           flex: 0.8,
@@ -90,7 +90,7 @@ const MyJournal = () => {
                       marginTop: "1%",
                     }}
                   >
-                    {note.passage}
+                    "{note.passage}"
                   </p>
                   <p
                     style={{
