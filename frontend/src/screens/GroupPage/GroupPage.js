@@ -49,24 +49,32 @@ const GroupPage = () => {
                 style={{
                   display: "flex",
                   height: "70px",
-                  justifyContent: "center",
+                  justifyContent: "space-between",
                 }}
               >
-                {note.verse}
+                <span style={{ width: "85%", textAlign: "left" }}>
+                  {note.verse} | {note.title} | {note.author}
+                </span>
+                <span style={{ fontSize: "12px" }}>{note.date}</span>
               </Accordion.Header>
               <Accordion.Body>
-                <h4>
-                  <Badge bg="success" text="light">
-                    Category - {note.category}{" "}
-                  </Badge>
-                </h4>
-
-                <blockquote className="blockquote mb-0">
-                  <p>{note.content}</p>
-                  <footer className="blockquote-footer">
-                    Created on <cite title="Source Title">04-24-2024</cite>
-                  </footer>
-                </blockquote>
+                <p
+                  style={{
+                    fontSize: "15px",
+                    marginTop: "1%",
+                  }}
+                >
+                  {note.passage}
+                </p>
+                <p
+                  style={{
+                    fontSize: "15px",
+                    marginTop: "3%",
+                    marginBottom: "2%",
+                  }}
+                >
+                  {note.content}
+                </p>
               </Accordion.Body>
             </Accordion.Item>
           </Accordion>
