@@ -5,7 +5,11 @@ import {
 } from "redux";
 import { thunk } from "redux-thunk";
 import { userLoginReducer, userRegisterReducer } from "./reducers/userReducers";
-import { journalCreateReducer } from "./reducers/journalReducer";
+import {
+  journalCreateReducer,
+  journalPersonalReducer,
+  journalGroupReducer,
+} from "./reducers/journalReducer";
 import {
   groupCreateReducer,
   groupAddReducer,
@@ -20,6 +24,8 @@ const reducer = combineReducers({
   groupCreate: groupCreateReducer,
   groupAdd: groupAddReducer,
   groupList: groupListReducer,
+  journalPersonal: journalPersonalReducer,
+  journalGroup: journalGroupReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")

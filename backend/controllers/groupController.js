@@ -55,11 +55,9 @@ const addToGroup = asyncHandler(async (req, res) => {
 });
 
 const groupGet = asyncHandler(async (req, res) => {
-  console.log("CALLED");
   try {
     // Use await with try-catch for error handling
     const groups = await Group.find({ members: req.user._id });
-    console.log(groups); // Logging the groups to console
     res.status(200).json({ groups });
   } catch (err) {
     console.log(err);
