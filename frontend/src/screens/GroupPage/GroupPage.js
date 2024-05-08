@@ -8,7 +8,8 @@ import journals from "../../data.js";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import Loading from "../../components/Loading";
 import ErrorMessage from "../../components/ErrorMessage";
-import { listGroup } from "../../actions/journalActions";
+import { TiDeleteOutline } from "react-icons/ti";
+import { listGroup, deleteJournalAction } from "../../actions/journalActions";
 
 const SelectDateModal = ({
   show,
@@ -87,6 +88,15 @@ const GroupPage = () => {
 
   const journalGroup = useSelector((state) => state.journalGroup);
   const { loading, journals, error } = journalGroup;
+  const journalCreate = useSelector((state) => state.journalCreate);
+  const { success: successCreate } = journalCreate;
+
+  const journalDeletee = useSelector((state) => state.journalDelete);
+  const {
+    loading: loadingDelete,
+    error: errorDelete,
+    success: successDelete,
+  } = journalDeletee;
 
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [filteredJournals, setFilteredJournals] = useState([]);
@@ -114,7 +124,7 @@ const GroupPage = () => {
     if (!userInfo) {
       nav("/");
     }
-  }, [userInfo, nav]);
+  }, [userInfo, nav, successCreate, successDelete]);
 
   useEffect(() => {
     if (journals?.length) {
@@ -159,6 +169,17 @@ const GroupPage = () => {
     return formattedDate;
   };
 
+  const deleteHandler = (id, title) => {
+    const userResponse = window.confirm(
+      `Are you sure you want to delete journal \"${title}\" ?`
+    );
+    if (userResponse) {
+      dispatch(deleteJournalAction(id));
+    } else {
+      console.log("NOT DELETED");
+    }
+  };
+
   return (
     <div
       style={{
@@ -190,11 +211,11 @@ const GroupPage = () => {
           setShowAll={setShowAll} // Pass setShowAll as a prop
         />
         {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
-        {/* {errorDelete && (
+        {errorDelete && (
           <ErrorMessage variant="danger">{errorDelete}</ErrorMessage>
-        )} */}
+        )}
         {loading && <Loading />}
-        {/* {loadingDelete && <Loading />} */}
+        {loadingDelete && <Loading />}
 
         {filteredJournals
           ?.slice()
@@ -240,6 +261,19 @@ const GroupPage = () => {
                   >
                     {note.content}
                   </p>
+                  <div
+                    style={{
+                      width: "100%",
+                      display: "flex",
+                      justifyContent: "flex-end",
+                    }}
+                  >
+                    <TiDeleteOutline
+                      size={20}
+                      className="deleteButton"
+                      onClick={() => deleteHandler(note._id, note.title)}
+                    />
+                  </div>
                 </Accordion.Body>
               </Accordion.Item>
             </Accordion>

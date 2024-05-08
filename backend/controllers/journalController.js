@@ -23,6 +23,24 @@ const createJournal = asyncHandler(async (req, res) => {
   }
 });
 
+const deleteJournal = asyncHandler(async (req, res) => {
+  const journal = await Journal.findById(req.params.id);
+
+  // console.log("USER", journal);
+  if (journal.author.toString() !== req.user._id.toString()) {
+    res.status(404);
+    throw new Error("You cannot perform this action");
+  }
+
+  if (journal) {
+    await journal.deleteOne();
+    res.json({ message: "Note Removed" });
+  } else {
+    res.status(404);
+    throw new Error("Note not found");
+  }
+});
+
 const getPersonalJournal = asyncHandler(async (req, res) => {
   try {
     // Use await with try-catch for error handling
@@ -50,4 +68,9 @@ const getGroupJournals = asyncHandler(async (req, res) => {
   }
 });
 
-module.exports = { createJournal, getPersonalJournal, getGroupJournals };
+module.exports = {
+  createJournal,
+  getPersonalJournal,
+  getGroupJournals,
+  deleteJournal,
+};

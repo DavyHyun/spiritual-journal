@@ -73,6 +73,52 @@ export const createJournalAction =
     }
   };
 
+export const deleteJournalAction = (id) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: JOURNAL_DELETE_REQUEST,
+    });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    const response = await fetch(
+      `http://localhost:3001/api/journal/${id}`,
+      config
+    );
+
+    // Check if the response status is not in the 200-299 range
+    if (!response.ok) {
+      const errorData = await response.json(); // Assuming server responds with JSON containing the error
+      throw new Error(errorData.message || "Something went wrong");
+    }
+
+    const data = await response.json();
+
+    dispatch({
+      type: JOURNAL_DELETE_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+    dispatch({
+      type: JOURNAL_DELETE_FAIL,
+      payload: message,
+    });
+  }
+};
+
 export const listPersonal = () => async (dispatch, getState) => {
   try {
     dispatch({

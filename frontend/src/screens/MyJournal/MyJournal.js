@@ -2,7 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Accordion, Badge, Button, Card, Modal, Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { listPersonal } from "../../actions/journalActions";
+import {
+  listPersonal,
+  deleteJournalAction,
+} from "../../actions/journalActions";
 import { logout } from "../../actions/userActions";
 import Header from "../../components/Header/Header";
 import { TiDeleteOutline } from "react-icons/ti";
@@ -94,6 +97,16 @@ const MyJournal = () => {
   const journalPersonal = useSelector((state) => state.journalPersonal);
   const { loading, journals, error } = journalPersonal;
 
+  const journalCreate = useSelector((state) => state.journalCreate);
+  const { success: successCreate } = journalCreate;
+
+  const journalDeletee = useSelector((state) => state.journalDelete);
+  const {
+    loading: loadingDelete,
+    error: errorDelete,
+    success: successDelete,
+  } = journalDeletee;
+
   useEffect(() => {
     if (showAll) {
       setFilteredJournals(journals);
@@ -115,7 +128,7 @@ const MyJournal = () => {
     if (!userInfo) {
       nav("/");
     }
-  }, [userInfo, nav]);
+  }, [userInfo, nav, successCreate, successDelete]);
 
   useEffect(() => {
     if (journals?.length) {
@@ -155,6 +168,17 @@ const MyJournal = () => {
     return formattedDate;
   };
 
+  const deleteHandler = (id, title) => {
+    const userResponse = window.confirm(
+      `Are you sure you want to delete journal \"${title}\" ?`
+    );
+    if (userResponse) {
+      dispatch(deleteJournalAction(id));
+    } else {
+      console.log("NOT DELETED");
+    }
+  };
+
   return (
     <div
       style={{
@@ -186,11 +210,11 @@ const MyJournal = () => {
           setShowAll={setShowAll} // Pass setShowAll as a prop
         />
         {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
-        {/* {errorDelete && (
+        {errorDelete && (
           <ErrorMessage variant="danger">{errorDelete}</ErrorMessage>
-        )} */}
+        )}
         {loading && <Loading />}
-        {/* {loadingDelete && <Loading />} */}
+        {loadingDelete && <Loading />}
         {filteredJournals
           ?.slice()
           .reverse()
@@ -242,7 +266,11 @@ const MyJournal = () => {
                       justifyContent: "flex-end",
                     }}
                   >
-                    <TiDeleteOutline size={20} className="deleteButton" />
+                    <TiDeleteOutline
+                      size={20}
+                      className="deleteButton"
+                      onClick={() => deleteHandler(note._id, note.title)}
+                    />
                   </div>
                 </Accordion.Body>
               </Accordion.Item>
