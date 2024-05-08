@@ -65,4 +65,19 @@ const groupGet = asyncHandler(async (req, res) => {
   }
 });
 
-module.exports = { createGroup, addToGroup, groupGet };
+const getCodes = asyncHandler(async (req, res) => {
+  try {
+    // Retrieve 'groupCode' for all groups without filtering by members
+    const groupCodes = await Group.find({}, "groupCode -_id");
+
+    // Extract just the group codes into an array
+    const codes = groupCodes.map((group) => group.groupCode);
+
+    res.status(200).json({ groupCodes: codes });
+  } catch (err) {
+    console.error(err);
+    res.status(400).json({ message: err.message });
+  }
+});
+
+module.exports = { createGroup, addToGroup, groupGet, getCodes };

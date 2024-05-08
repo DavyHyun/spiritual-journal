@@ -8,6 +8,9 @@ import {
   GROUP_LIST_REQUEST,
   GROUP_LIST_SUCCESS,
   GROUP_LIST_FAIL,
+  GROUP_CODES_FAIL,
+  GROUP_CODES_SUCCESS,
+  GROUP_CODES_REQUEST,
 } from "../constants/groupConstants";
 
 export const createGroup =
@@ -138,6 +141,45 @@ export const groupList = () => async (dispatch, getState) => {
     // This will now correctly handle both network errors and bad HTTP responses
     dispatch({
       type: GROUP_LIST_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  } finally {
+  }
+};
+
+export const groupCodes = () => async (dispatch, getState) => {
+  try {
+    dispatch({ type: GROUP_CODES_REQUEST });
+
+    const config = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    const response = await fetch(
+      "http://localhost:3001/api/group/codes",
+      config
+    );
+
+    // Check if the response status is not in the 200-299 range
+    if (!response.ok) {
+      const errorData = await response.json(); // Assuming server responds with JSON containing the error
+      throw new Error(errorData.message || "Something went wrong");
+    }
+
+    const data = await response.json();
+    console.log("GROUPCODES:", data);
+
+    dispatch({ type: GROUP_CODES_SUCCESS, payload: data });
+  } catch (error) {
+    // This will now correctly handle both network errors and bad HTTP responses
+    dispatch({
+      type: GROUP_CODES_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

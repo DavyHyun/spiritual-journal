@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createGroup, addToGroup } from "../../actions/groupActions";
+import {
+  createGroup,
+  addToGroup,
+  groupCodes,
+} from "../../actions/groupActions";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../../actions/userActions";
 import Sidebar from "../../components/Sidebar/Sidebar";
@@ -12,11 +16,15 @@ const AddGroup = () => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+  const groupCode = useSelector((state) => state.groupCodes);
+  const { codes } = groupCode;
+
   const [createN, setCreateN] = useState("");
   const [createC, setCreateC] = useState("");
   const [addC, setAddC] = useState("");
 
   useEffect(() => {
+    dispatch(groupCodes());
     if (!userInfo) {
       nav("/");
     }
@@ -28,6 +36,10 @@ const AddGroup = () => {
   // }
 
   const groupHandle = async () => {
+    if (codes.groupCodes.includes(createC)) {
+      alert("CODE ALREADY EXISTS");
+      return;
+    }
     if (createC.length > 0 && addC.length > 0) {
       alert("Please Enter One or the Other");
     } else if (createC.length > 0) {

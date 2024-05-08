@@ -15,6 +15,7 @@ import {
   groupCreateReducer,
   groupAddReducer,
   groupListReducer,
+  groupCodesReducer,
 } from "./reducers/groupReducer";
 import { composeWithDevTools } from "@redux-devtools/extension";
 
@@ -28,6 +29,7 @@ const reducer = combineReducers({
   journalPersonal: journalPersonalReducer,
   journalGroup: journalGroupReducer,
   journalDelete: journalDeleteReducer,
+  groupCodes: groupCodesReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")
