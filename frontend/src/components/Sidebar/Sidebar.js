@@ -3,6 +3,8 @@ import "./Sidebar.css";
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { groupList } from "../../actions/groupActions";
+import Loading from "../Loading";
+import ErrorMessage from "../ErrorMessage";
 
 const Section = ({ title, link }) => {
   return (
@@ -84,6 +86,11 @@ const Sidebar = () => {
           }}
         />
       </div>
+      {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
+      {/* {errorDelete && (
+          <ErrorMessage variant="danger">{errorDelete}</ErrorMessage>
+      )} */}
+      {/* {loadingDelete && <Loading />} */}
       {groups?.map((group) => (
         <Section title={group.groupName} link={`/mygroups/${group._id}`} />
       ))}

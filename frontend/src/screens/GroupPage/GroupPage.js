@@ -6,6 +6,8 @@ import { logout } from "../../actions/userActions";
 import Header from "../../components/Header/Header";
 import journals from "../../data.js";
 import Sidebar from "../../components/Sidebar/Sidebar";
+import Loading from "../../components/Loading";
+import ErrorMessage from "../../components/ErrorMessage";
 import { listGroup } from "../../actions/journalActions";
 
 const SelectDateModal = ({
@@ -187,6 +189,12 @@ const GroupPage = () => {
           setShowModal={setShowModal} // Pass setShowModal as a prop
           setShowAll={setShowAll} // Pass setShowAll as a prop
         />
+        {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
+        {/* {errorDelete && (
+          <ErrorMessage variant="danger">{errorDelete}</ErrorMessage>
+        )} */}
+        {loading && <Loading />}
+        {/* {loadingDelete && <Loading />} */}
 
         {filteredJournals
           ?.slice()

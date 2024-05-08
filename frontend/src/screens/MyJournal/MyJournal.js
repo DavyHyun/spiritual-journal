@@ -5,6 +5,9 @@ import { useNavigate } from "react-router-dom";
 import { listPersonal } from "../../actions/journalActions";
 import { logout } from "../../actions/userActions";
 import Header from "../../components/Header/Header";
+import { TiDeleteOutline } from "react-icons/ti";
+import Loading from "../../components/Loading";
+import ErrorMessage from "../../components/ErrorMessage";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import "./MyJournal.css";
 
@@ -182,7 +185,12 @@ const MyJournal = () => {
           setShowModal={setShowModal} // Pass setShowModal as a prop
           setShowAll={setShowAll} // Pass setShowAll as a prop
         />
-
+        {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
+        {/* {errorDelete && (
+          <ErrorMessage variant="danger">{errorDelete}</ErrorMessage>
+        )} */}
+        {loading && <Loading />}
+        {/* {loadingDelete && <Loading />} */}
         {filteredJournals
           ?.slice()
           .reverse()
@@ -227,6 +235,15 @@ const MyJournal = () => {
                   >
                     {note.content}
                   </p>
+                  <div
+                    style={{
+                      width: "100%",
+                      display: "flex",
+                      justifyContent: "flex-end",
+                    }}
+                  >
+                    <TiDeleteOutline size={20} className="deleteButton" />
+                  </div>
                 </Accordion.Body>
               </Accordion.Item>
             </Accordion>
