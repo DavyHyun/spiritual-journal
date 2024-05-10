@@ -8,8 +8,10 @@ import {
   USER_REGISTER_SUCCESS,
 } from "../constants/userConstants";
 
+const LOCAL = false;
+
 export const login = (username, password) => async (dispatch) => {
-    try {
+  try {
     dispatch({ type: USER_LOGIN_REQUEST });
 
     const config = {
@@ -23,10 +25,16 @@ export const login = (username, password) => async (dispatch) => {
       }),
     };
 
-    const response = await fetch(
-      "http://localhost:3001/api/users/login",
-      config
-    );
+    var response;
+
+    if (LOCAL) {
+      response = await fetch("http://localhost:3001/api/users/login", config);
+    } else {
+      response = await fetch(
+        "https://spiritual-journal.onrender.com/api/users/login",
+        config
+      );
+    }
 
     // Check if the response status is not in the 200-299 range
     if (!response.ok) {
@@ -50,7 +58,7 @@ export const login = (username, password) => async (dispatch) => {
     });
   } finally {
   }
-}
+};
 
 export const logout = () => async (dispatch) => {
   localStorage.removeItem("userInfo");
@@ -72,7 +80,16 @@ export const register = (username, password) => async (dispatch) => {
       }),
     };
 
-    const response = await fetch("http://localhost:3001/api/users", config);
+    var response;
+
+    if (LOCAL) {
+      response = await fetch("http://localhost:3001/api/users", config);
+    } else {
+      response = await fetch(
+        "https://spiritual-journal.onrender.com/api/users",
+        config
+      );
+    }
 
     // Check if the response status is not in the 200-299 range
     if (!response.ok) {

@@ -19,6 +19,8 @@ import {
   JOURNAL_COMMENT_FAIL,
 } from "../constants/journalConstants";
 
+const LOCAL = false;
+
 export const createJournalAction =
   (verse, passage, content, title, selectedGroups) =>
   async (dispatch, getState) => {
@@ -45,12 +47,18 @@ export const createJournalAction =
           groups: selectedGroups,
         }),
       };
-
-      // change to correct syntax
-      const response = await fetch(
-        "http://localhost:3001/api/journal/create",
-        config
-      );
+      var response;
+      if (LOCAL) {
+        response = await fetch(
+          "http://localhost:3001/api/journal/create",
+          config
+        );
+      } else {
+        response = await fetch(
+          "https://spiritual-journal.onrender.com/api/journal/create",
+          config
+        );
+      }
 
       // Check if the response status is not in the 200-299 range
       if (!response.ok) {
@@ -92,11 +100,16 @@ export const deleteJournalAction = (id) => async (dispatch, getState) => {
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
+    var response;
 
-    const response = await fetch(
-      `http://localhost:3001/api/journal/${id}`,
-      config
-    );
+    if (LOCAL) {
+      response = await fetch(`http://localhost:3001/api/journal/${id}`, config);
+    } else {
+      response = await fetch(
+        `https://spiritual-journal.onrender.com/api/journal/${id}`,
+        config
+      );
+    }
 
     // Check if the response status is not in the 200-299 range
     if (!response.ok) {
@@ -137,11 +150,19 @@ export const listPersonal = () => async (dispatch, getState) => {
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
+    var response;
 
-    const response = await fetch(
-      "http://localhost:3001/api/journal/personal",
-      config
-    );
+    if (LOCAL) {
+      response = await fetch(
+        "http://localhost:3001/api/journal/personal",
+        config
+      );
+    } else {
+      response = await fetch(
+        "https://spiritual-journal.onrender.com/api/journal/personal",
+        config
+      );
+    }
 
     // Check if the response status is not in the 200-299 range
     if (!response.ok) {
@@ -187,11 +208,16 @@ export const listGroup = (id) => async (dispatch, getState) => {
         groupID: id,
       }),
     };
+    var response;
 
-    const response = await fetch(
-      "http://localhost:3001/api/journal/group",
-      config
-    );
+    if (LOCAL) {
+      response = await fetch("http://localhost:3001/api/journal/group", config);
+    } else {
+      response = await fetch(
+        "https://spiritual-journal.onrender.com/api/journal/group",
+        config
+      );
+    }
 
     // Check if the response status is not in the 200-299 range
     if (!response.ok) {
@@ -239,12 +265,19 @@ export const addCommentAction =
           journalId: journalId,
         }),
       };
+      var response;
 
-      // change to correct syntax
-      const response = await fetch(
-        "http://localhost:3001/api/journal/comment",
-        config
-      );
+      if (LOCAL) {
+        response = await fetch(
+          "http://localhost:3001/api/journal/comment",
+          config
+        );
+      } else {
+        response = await fetch(
+          "https://spiritual-journal.onrender.com/api/journal/comment",
+          config
+        );
+      }
 
       // Check if the response status is not in the 200-299 range
       if (!response.ok) {

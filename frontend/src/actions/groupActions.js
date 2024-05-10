@@ -13,6 +13,8 @@ import {
   GROUP_CODES_REQUEST,
 } from "../constants/groupConstants";
 
+const LOCAL = false;
+
 export const createGroup =
   (groupName, groupCode) => async (dispatch, getState) => {
     try {
@@ -36,10 +38,19 @@ export const createGroup =
         }),
       };
 
-      const response = await fetch(
-        "http://localhost:3001/api/group/create",
-        config
-      );
+      var response;
+
+      if (LOCAL) {
+        response = await fetch(
+          "http://localhost:3001/api/group/create",
+          config
+        );
+      } else {
+        response = await fetch(
+          "https://spiritual-journal.onrender.com/api/group/create",
+          config
+        );
+      }
 
       if (!response.ok) {
         const errorData = await response.json(); // Assuming server responds with JSON containing the error
@@ -85,7 +96,16 @@ export const addToGroup = (groupCode) => async (dispatch, getState) => {
       }),
     };
 
-    const response = await fetch("http://localhost:3001/api/group/add", config);
+    var response;
+
+    if (LOCAL) {
+      response = await fetch("http://localhost:3001/api/group/add", config);
+    } else {
+      response = await fetch(
+        "https://spiritual-journal.onrender.com/api/group/add",
+        config
+      );
+    }
 
     if (!response.ok) {
       const errorData = await response.json(); // Assuming server responds with JSON containing the error
@@ -125,7 +145,16 @@ export const groupList = () => async (dispatch, getState) => {
       },
     };
 
-    const response = await fetch("http://localhost:3001/api/group/get", config);
+    var response;
+
+    if (LOCAL) {
+      response = await fetch("http://localhost:3001/api/group/get", config);
+    } else {
+      response = await fetch(
+        "https://spiritual-journal.onrender.com/api/group/get",
+        config
+      );
+    }
 
     // Check if the response status is not in the 200-299 range
     if (!response.ok) {
@@ -161,10 +190,15 @@ export const groupCodes = () => async (dispatch, getState) => {
       },
     };
 
-    const response = await fetch(
-      "http://localhost:3001/api/group/codes",
-      config
-    );
+    var response;
+    if (LOCAL) {
+      response = await fetch("http://localhost:3001/api/group/codes", config);
+    } else {
+      response = await fetch(
+        "https://spiritual-journal.onrender.com/api/group/codes",
+        config
+      );
+    }
 
     // Check if the response status is not in the 200-299 range
     if (!response.ok) {
