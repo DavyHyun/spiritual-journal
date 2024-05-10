@@ -11,6 +11,85 @@ import ErrorMessage from "../../components/ErrorMessage";
 import { TiDeleteOutline } from "react-icons/ti";
 import { listGroup, deleteJournalAction } from "../../actions/journalActions";
 
+const comments = [
+  {
+    name: "David Hyun",
+    text: "Really good insight! I agree with this heavily",
+  },
+  {
+    name: "Andrew Hyun",
+    text: "Good stuff I think the same as well.",
+  },
+];
+
+const CommentForm = ({ journalId }) => {
+  const [commentText, setCommentText] = useState("");
+  const dispatch = useDispatch();
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
+  const submitComment = () => {
+    if (!commentText.trim()) return; // Check for empty comment
+
+    const commentData = {
+      text: commentText,
+      author: userInfo._id, // Assuming you have user's info from state
+      authorName: userInfo.username, // Adjust according to your user state
+    };
+
+    alert(commentData.authorName);
+    // Dispatch an action to add the comment
+    // Replace `addCommentToJournal` with your actual action creator
+    // dispatch(addCommentToJournal(journalId, commentData));
+    setCommentText(""); // Clear the input after submission
+  };
+
+  return (
+    <Form
+      onSubmit={(e) => {
+        e.preventDefault();
+        submitComment();
+      }}
+      style={{ display: "flex", flexDirection: "row", width: "100%" }}
+    >
+      <Form.Group
+        controlId="commentText"
+        style={{ marginRight: "2%", width: "90%" }}
+      >
+        <Form.Control
+          as="textarea"
+          rows={1}
+          value={commentText}
+          onChange={(e) => setCommentText(e.target.value)}
+          placeholder="Write a comment..."
+        />
+      </Form.Group>
+      <Button variant="primary" type="submit">
+        Comment
+      </Button>
+    </Form>
+  );
+};
+
+const Comment = ({ name, text }) => {
+  return (
+    <div
+      style={{
+        display: "flex",
+        width: "80%",
+        flexDirection: "column",
+        marginTop: "-1%",
+        marginBottom: "1%",
+      }}
+    >
+      <p style={{ fontSize: "12px", textAlign: "left" }}>{name}</p>
+      <p style={{ fontSize: "15px", textAlign: "left", marginTop: "-20px" }}>
+        {text}
+      </p>
+    </div>
+  );
+};
+
 const SelectDateModal = ({
   show,
   onHide,
@@ -265,7 +344,22 @@ const GroupPage = () => {
                     style={{
                       width: "100%",
                       display: "flex",
+                      flexDirection: "column",
+                      marginTop: "4%",
+                    }}
+                  >
+                    <p>COMMENTS</p>
+                    {comments.map((comment) => (
+                      <Comment name={comment.name} text={comment.text} />
+                    ))}
+                  </div>
+                  <CommentForm journalId={note._id} />
+                  <div
+                    style={{
+                      width: "100%",
+                      display: "flex",
                       justifyContent: "flex-end",
+                      marginTop: "2%",
                     }}
                   >
                     <TiDeleteOutline
