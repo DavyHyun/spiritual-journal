@@ -68,9 +68,30 @@ const getGroupJournals = asyncHandler(async (req, res) => {
   }
 });
 
+const addComment = asyncHandler(async (req, res) => {
+  const { text, journalId } = req.body;
+
+  const journal = await Journal.findById(journalId);
+  if (!journal) {
+    res.status(404);
+    throw new Error("Journal not found.");
+  }
+
+  const comment = {
+    text: text,
+    author: req.user._id,
+    authorName: req.user.username,
+  };
+
+  journal.comments.push(comment);
+  await journal.save();
+  res.status(200).json({ message: "Added to group successfully." });
+});
+
 module.exports = {
   createJournal,
   getPersonalJournal,
   getGroupJournals,
   deleteJournal,
+  addComment,
 };

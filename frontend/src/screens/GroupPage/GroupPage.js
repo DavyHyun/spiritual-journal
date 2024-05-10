@@ -9,7 +9,11 @@ import Sidebar from "../../components/Sidebar/Sidebar";
 import Loading from "../../components/Loading";
 import ErrorMessage from "../../components/ErrorMessage";
 import { TiDeleteOutline } from "react-icons/ti";
-import { listGroup, deleteJournalAction } from "../../actions/journalActions";
+import {
+  listGroup,
+  deleteJournalAction,
+  addCommentAction,
+} from "../../actions/journalActions";
 
 const comments = [
   {
@@ -30,17 +34,9 @@ const CommentForm = ({ journalId }) => {
 
   const submitComment = () => {
     if (!commentText.trim()) return; // Check for empty comment
-
-    const commentData = {
-      text: commentText,
-      author: userInfo._id, // Assuming you have user's info from state
-      authorName: userInfo.username, // Adjust according to your user state
-    };
-
-    alert(commentData.authorName);
     // Dispatch an action to add the comment
     // Replace `addCommentToJournal` with your actual action creator
-    // dispatch(addCommentToJournal(journalId, commentData));
+    dispatch(addCommentAction(journalId, commentText));
     setCommentText(""); // Clear the input after submission
   };
 
@@ -170,6 +166,13 @@ const GroupPage = () => {
   const journalCreate = useSelector((state) => state.journalCreate);
   const { success: successCreate } = journalCreate;
 
+  const commentAdd = useSelector((state) => state.addComment);
+  const {
+    loading: commentLoading,
+    error: commentError,
+    success: commentSuccess,
+  } = commentAdd;
+
   const journalDeletee = useSelector((state) => state.journalDelete);
   const {
     loading: loadingDelete,
@@ -181,6 +184,11 @@ const GroupPage = () => {
   const [filteredJournals, setFilteredJournals] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [showAll, setShowAll] = useState(true);
+  const [openItemId, setOpenItemId] = useState(null);
+
+  const handleAccordionToggle = (itemId) => {
+    setOpenItemId((prev) => (prev === itemId ? null : itemId));
+  };
 
   useEffect(() => {
     if (showAll) {
@@ -203,7 +211,7 @@ const GroupPage = () => {
     if (!userInfo) {
       nav("/");
     }
-  }, [userInfo, nav, successCreate, successDelete]);
+  }, [userInfo, nav, successCreate, successDelete, commentSuccess]);
 
   useEffect(() => {
     if (journals?.length) {
@@ -301,10 +309,11 @@ const GroupPage = () => {
           .reverse()
           .map((note) => (
             <Accordion
-              defaultActiveKey={["0"]}
+              activeKey={openItemId}
+              onSelect={(eventKey) => handleAccordionToggle(eventKey)}
               style={{ width: "75vw", maxWidth: "75vw" }}
             >
-              <Accordion.Item eventkey="0">
+              <Accordion.Item eventKey={note._id}>
                 <Accordion.Header
                   style={{
                     display: "flex",
@@ -349,8 +358,13 @@ const GroupPage = () => {
                     }}
                   >
                     <p>COMMENTS</p>
-                    {comments.map((comment) => (
-                      <Comment name={comment.name} text={comment.text} />
+                    {commentError && (
+                      <ErrorMessage variant="danger">{error}</ErrorMessage>
+                    )}
+                    {commentLoading && <Loading />}
+
+                    {note.comments.map((comment) => (
+                      <Comment name={comment.authorName} text={comment.text} />
                     ))}
                   </div>
                   <CommentForm journalId={note._id} />

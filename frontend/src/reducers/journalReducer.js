@@ -14,6 +14,9 @@ import {
   JOURNAL_GROUP_REQUEST,
   JOURNAL_GROUP_SUCCESS,
   JOURNAL_GROUP_FAIL,
+  JOURNAL_COMMENT_REQUEST,
+  JOURNAL_COMMENT_SUCCESS,
+  JOURNAL_COMMENT_FAIL,
 } from "../constants/journalConstants";
 
 export const journalCreateReducer = (state = {}, action) => {
@@ -65,6 +68,20 @@ export const journalGroupReducer = (state = { journals: [] }, action) => {
     case JOURNAL_GROUP_SUCCESS:
       return { loading: false, journals: action.payload };
     case JOURNAL_GROUP_FAIL:
+      return { loading: false, error: action.payload };
+
+    default:
+      return state;
+  }
+};
+
+export const addCommentReducer = (state = {}, action) => {
+  switch (action.type) {
+    case JOURNAL_COMMENT_REQUEST:
+      return { loading: true };
+    case JOURNAL_COMMENT_SUCCESS:
+      return { loading: false, success: true };
+    case JOURNAL_COMMENT_FAIL:
       return { loading: false, error: action.payload };
 
     default:

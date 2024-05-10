@@ -14,6 +14,9 @@ import {
   JOURNAL_GROUP_REQUEST,
   JOURNAL_GROUP_SUCCESS,
   JOURNAL_GROUP_FAIL,
+  JOURNAL_COMMENT_REQUEST,
+  JOURNAL_COMMENT_SUCCESS,
+  JOURNAL_COMMENT_FAIL,
 } from "../constants/journalConstants";
 
 export const createJournalAction =
@@ -213,3 +216,56 @@ export const listGroup = (id) => async (dispatch, getState) => {
     });
   }
 };
+
+export const addCommentAction =
+  (journalId, text) => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: JOURNAL_COMMENT_REQUEST,
+      });
+
+      const {
+        userLogin: { userInfo },
+      } = getState();
+
+      const config = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+        body: JSON.stringify({
+          text: text,
+          journalId: journalId,
+        }),
+      };
+
+      // change to correct syntax
+      const response = await fetch(
+        "http://localhost:3001/api/journal/comment",
+        config
+      );
+
+      // Check if the response status is not in the 200-299 range
+      if (!response.ok) {
+        const errorData = await response.json(); // Assuming server responds with JSON containing the error
+        throw new Error(errorData.message || "Something went wrong");
+      }
+
+      const data = await response.json();
+
+      dispatch({
+        type: JOURNAL_COMMENT_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {
+      const message =
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message;
+      dispatch({
+        type: JOURNAL_COMMENT_FAIL,
+        payload: message,
+      });
+    }
+  };

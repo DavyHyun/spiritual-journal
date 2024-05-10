@@ -10,6 +10,7 @@ import {
   journalPersonalReducer,
   journalGroupReducer,
   journalDeleteReducer,
+  addCommentReducer,
 } from "./reducers/journalReducer";
 import {
   groupCreateReducer,
@@ -30,6 +31,7 @@ const reducer = combineReducers({
   journalGroup: journalGroupReducer,
   journalDelete: journalDeleteReducer,
   groupCodes: groupCodesReducer,
+  addComment: addCommentReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")
