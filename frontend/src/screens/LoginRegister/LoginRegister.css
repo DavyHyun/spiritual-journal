@@ -1,72 +1,72 @@
 /* CONTAINTERS */
 .containerLogin {
-    background-image: url(../../misc/images/loginNotebook.png);
-    width: 100%;
-    height: 100vh;
-    background-position: center;
-    background-repeat: no-repeat;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-size: 120vh;
+  background-image: url(../../misc/images/loginNotebook.png);
+  width: 100%;
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-size: 120vh;
 }
 
 .loginBox {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    width: 350px;
-    margin-bottom: 10%
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 350px;
+  margin-bottom: 10%;
 }
 
 .entryBox {
-    display: flex;
-    justify-content: center;
-    flex-direction: column; 
-    width: 100%;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
 }
 
 .buttonsContainer {
-    display: flex;
-    justify-content: space-between;
-    flex-direction: row; 
-    width: 70%;
-    margin-top: 10%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  width: 70%;
+  margin-top: 10%;
 }
 
 /* TEXT */
-.titleText {
-    font-size: 32px;
-    text-align: center;
-    font-weight: 100;
-    margin-bottom: 3%;
+.titleTextLogin {
+  font-size: 32px;
+  text-align: center;
+  font-weight: 100;
+  margin-bottom: 3%;
 }
 
 .formInput {
-    height: 30px;
-    margin-top: 8%;
-    border:none;
-    border-bottom: 1px solid gray;
-    padding-bottom: 3%;
-    padding-left: 2%;
-    width: 70%; 
-    outline: none;
-    font-size: 14px;
+  height: 30px;
+  margin-top: 8%;
+  border: none;
+  border-bottom: 1px solid gray;
+  padding-bottom: 3%;
+  padding-left: 2%;
+  width: 70%;
+  outline: none;
+  font-size: 14px;
 }
 
 .button {
-    width: 42%;
-    border: 1px solid gray;
-    height: 37px;
-    justify-content: center;
-    align-items: center;
-    display: flex;
-    font-size: 14px;
+  width: 42%;
+  border: 1px solid gray;
+  height: 37px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  font-size: 14px;
 }
 
 .button:hover {
-    cursor: pointer;
-    transform: scale(1.05)
+  cursor: pointer;
+  transform: scale(1.05);
 }

@@ -35,7 +35,7 @@ const LoginRegister = () => {
   return (
     <div className="containerLogin">
       <div className="loginBox">
-        <p className="titleText">My Spiritual Journal</p>
+        <p className="titleTextLogin">My Spiritual Journal</p>
         <div className="entryBox">
           <input
             className="formInput"
