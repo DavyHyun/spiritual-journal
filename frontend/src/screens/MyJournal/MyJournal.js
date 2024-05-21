@@ -180,25 +180,9 @@ const MyJournal = () => {
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        flexDirection: "row",
-        // alignItems: "center",
-      }}
-    >
+    <div className="myJournalContainer">
       <Sidebar />
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "flex-start",
-          flexDirection: "column",
-          alignItems: "center",
-          flex: 0.8,
-          marginBottom: "5%",
-        }}
-      >
+      <div className="myJournals">
         <div onClick={() => setShowModal(true)} className="dateButton">
           {showAll ? "Filter" : `${formatDateMonth(selectedDate)}`}
         </div>

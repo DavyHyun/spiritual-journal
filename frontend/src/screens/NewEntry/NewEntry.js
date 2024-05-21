@@ -104,14 +104,7 @@ const NewEntry = () => {
         <input
           type="text"
           placeholder="Title..."
-          style={{
-            fontSize: "20px",
-            width: "80%",
-            border: "none",
-            outline: "none",
-            marginRight: "40px",
-            marginBottom: "2%",
-          }}
+          className="titleText"
           onChange={(e) => {
             setTitle(e.target.value);
           }}
