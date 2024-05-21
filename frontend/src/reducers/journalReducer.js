@@ -47,6 +47,7 @@ export const journalDeleteReducer = (state = {}, action) => {
   }
 };
 
+// retrieve journal entries for "My Journals" section
 export const journalPersonalReducer = (state = { journals: [] }, action) => {
   switch (action.type) {
     case JOURNAL_LIST_REQUEST:
@@ -61,6 +62,7 @@ export const journalPersonalReducer = (state = { journals: [] }, action) => {
   }
 };
 
+// journal entries for Groups
 export const journalGroupReducer = (state = { journals: [] }, action) => {
   switch (action.type) {
     case JOURNAL_GROUP_REQUEST:
