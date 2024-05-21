@@ -4,5 +4,5 @@ Team Members:
 1. David hyun
 2.
 3.
-4.
+4. Nicole Zhou
 5.
