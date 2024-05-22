@@ -224,21 +224,28 @@ const MyJournal = () => {
                   </span>
                 </Accordion.Header>
                 <Accordion.Body>
-                  <p
+                  <div
                     style={{
-                      fontSize: "15px",
-                      marginTop: "1%",
+                      maxHeight: "195px",
+                      overflowY: "scroll",
                     }}
                   >
-                    "{note.passage}"
-                  </p>
+                    <p
+                      style={{
+                        fontSize: "15px",
+                        marginTop: "1%",
+                      }}
+                    >
+                      "{note.passage}"
+                    </p>
+                  </div>
                   <p
                     style={{
                       fontSize: "15px",
                       marginTop: "3%",
                       marginBottom: "2%",
                       whiteSpace: "normal", // Ensures white spaces and new lines are handled normally
-                      wordWrap: "break-word",
+                      // wordWrap: "break-word",
                     }}
                   >
                     {note.content}

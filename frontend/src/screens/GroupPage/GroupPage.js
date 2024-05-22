@@ -330,14 +330,21 @@ const GroupPage = () => {
                   </span>
                 </Accordion.Header>
                 <Accordion.Body>
-                  <p
+                  <div
                     style={{
-                      fontSize: "15px",
-                      marginTop: "1%",
+                      maxHeight: "195px",
+                      overflowY: "scroll",
                     }}
                   >
-                    "{note.passage}"
-                  </p>
+                    <p
+                      style={{
+                        fontSize: "15px",
+                        marginTop: "1%",
+                      }}
+                    >
+                      "{note.passage}"
+                    </p>
+                  </div>
                   <p
                     style={{
                       fontSize: "15px",
