@@ -18,6 +18,9 @@ const LoginRegister = () => {
   const userLogin = useSelector((state) => state.userLogin);
   const { loading, error, userInfo } = userLogin;
 
+  const userRegister = useSelector((state) => state.userRegister);
+  const { rLoading, rError, rUserInfo } = userRegister;
+
   useEffect(() => {
     if (userInfo) {
       nav("/myjournal");
@@ -36,6 +39,9 @@ const LoginRegister = () => {
     <div className="containerLogin">
       <div className="loginBox">
         <p className="titleTextLogin">My Spiritual Journal</p>
+        {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
+        {rError && <ErrorMessage variant="danger">{rError}</ErrorMessage>}
+        {(loading || rLoading) && <Loading />}
         <div className="entryBox">
           <input
             className="formInput"

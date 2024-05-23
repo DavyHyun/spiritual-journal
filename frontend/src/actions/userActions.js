@@ -93,8 +93,13 @@ export const register = (username, password) => async (dispatch) => {
 
     // Check if the response status is not in the 200-299 range
     if (!response.ok) {
-      const errorData = await response.json(); // Assuming server responds with JSON containing the error
-      throw new Error(errorData.message || "Something went wrong");
+      const errorData = await response.json();
+      console.log(errorData.message); // Assuming server responds with JSON containing the error
+      dispatch({
+        type: USER_REGISTER_FAIL,
+        payload: errorData.message,
+      });
+      return;
     }
 
     const data = await response.json();
