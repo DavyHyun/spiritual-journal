@@ -244,7 +244,7 @@ const MyJournal = () => {
                       fontSize: "15px",
                       marginTop: "3%",
                       marginBottom: "2%",
-                      whiteSpace: "normal", // Ensures white spaces and new lines are handled normally
+                      whiteSpace: "pre-wrap", // Ensures white spaces and new lines are handled normally
                       // wordWrap: "break-word",
                     }}
                   >

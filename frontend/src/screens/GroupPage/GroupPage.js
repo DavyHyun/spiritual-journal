@@ -350,8 +350,7 @@ const GroupPage = () => {
                       fontSize: "15px",
                       marginTop: "3%",
                       marginBottom: "2%",
-                      whiteSpace: "normal", // Ensures white spaces and new lines are handled normally
-                      wordWrap: "break-word",
+                      whiteSpace: "pre-wrap", // Ensures white spaces and new lines are handled normally
                     }}
                   >
                     {note.content}
