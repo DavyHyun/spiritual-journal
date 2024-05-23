@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Accordion, Badge, Button, Card, Modal, Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -90,6 +90,19 @@ const MyJournal = () => {
   const [filteredJournals, setFilteredJournals] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [showAll, setShowAll] = useState(true);
+
+  const accordionRefs = useRef([]);
+
+  const scrollToContent = (index) => {
+    if (accordionRefs.current[index]) {
+      setTimeout(() => {
+        accordionRefs.current[index].scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+        });
+      }, 400);
+    }
+  };
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
@@ -202,10 +215,11 @@ const MyJournal = () => {
         {filteredJournals
           ?.slice()
           .reverse()
-          .map((note) => (
+          .map((note, index) => (
             <Accordion
               defaultActiveKey={["0"]}
               style={{ width: "75vw", maxWidth: "75vw" }}
+              onClick={() => scrollToContent(index)}
             >
               <Accordion.Item eventkey="0">
                 <Accordion.Header
@@ -223,7 +237,9 @@ const MyJournal = () => {
                     {formatDate(note.createdAt)}
                   </span>
                 </Accordion.Header>
-                <Accordion.Body>
+                <Accordion.Body
+                  ref={(el) => (accordionRefs.current[index] = el)}
+                >
                   <div
                     style={{
                       maxHeight: "195px",

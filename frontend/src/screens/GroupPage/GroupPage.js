@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Accordion, Badge, Button, Card, Modal, Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
@@ -14,17 +14,6 @@ import {
   deleteJournalAction,
   addCommentAction,
 } from "../../actions/journalActions";
-
-const comments = [
-  {
-    name: "David Hyun",
-    text: "Really good insight! I agree with this heavily",
-  },
-  {
-    name: "Andrew Hyun",
-    text: "Good stuff I think the same as well.",
-  },
-];
 
 const CommentForm = ({ journalId }) => {
   const [commentText, setCommentText] = useState("");
@@ -160,6 +149,19 @@ const GroupPage = () => {
   const { id } = useParams();
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
+
+  const accordionRefs = useRef([]);
+
+  const scrollToContent = (index) => {
+    if (accordionRefs.current[index]) {
+      setTimeout(() => {
+        accordionRefs.current[index].scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+        });
+      }, 400);
+    }
+  };
 
   const journalGroup = useSelector((state) => state.journalGroup);
   const { loading, journals, error } = journalGroup;
@@ -307,11 +309,12 @@ const GroupPage = () => {
         {filteredJournals
           ?.slice()
           .reverse()
-          .map((note) => (
+          .map((note, index) => (
             <Accordion
               activeKey={openItemId}
               onSelect={(eventKey) => handleAccordionToggle(eventKey)}
               style={{ width: "75vw", maxWidth: "75vw" }}
+              onClick={() => scrollToContent(index)}
             >
               <Accordion.Item eventKey={note._id}>
                 <Accordion.Header
@@ -329,7 +332,9 @@ const GroupPage = () => {
                     {formatDate(note.createdAt)}
                   </span>
                 </Accordion.Header>
-                <Accordion.Body>
+                <Accordion.Body
+                  ref={(el) => (accordionRefs.current[index] = el)}
+                >
                   <div
                     style={{
                       maxHeight: "195px",
