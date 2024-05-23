@@ -30,23 +30,20 @@ const NewEntry = () => {
   const group = useSelector((state) => state.groupList);
   const { loadingG, groups } = group;
 
-  const resetHandler = () => {
-    setBook("");
-    setChapter("");
-    setVerses("");
-    setVerseText("");
-    setReflection("");
-    setTitle("");
-  };
+  // const resetHandler = () => {
+  //   setBook("");
+  //   setChapter("");
+  //   setVerses("");
+  //   setVerseText("");
+  //   setReflection("");
+  //   setTitle("");
+  // };
 
   const submitHandler = () => {
     const verse = book + " " + chapter + ":" + verses;
     dispatch(
       createJournalAction(verse, verseText, reflection, title, selectedGroups)
     );
-
-    resetHandler();
-    nav("/myjournal");
   };
 
   const handleGroupSelect = (groupId) => {
@@ -65,6 +62,10 @@ const NewEntry = () => {
   };
 
   useEffect(() => {
+    if (journal) {
+      nav("/myjournal");
+    }
+    console.log("JOURNAL: ", journal);
     dispatch(groupList());
     const fetchVerseText = async () => {
       if (verses !== "" && book !== "" && chapter !== "" && !isNaN(chapter)) {
@@ -90,7 +91,7 @@ const NewEntry = () => {
     };
 
     fetchVerseText();
-  }, [book, chapter, verses, dispatch, userInfo]);
+  }, [journalCreate, book, chapter, verses, dispatch, userInfo]);
 
   if (loadingG) {
     return <Loading />;
@@ -98,9 +99,9 @@ const NewEntry = () => {
 
   return (
     <div className="containerEntry">
-      {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
-      {loading && <Loading size={50} />}
       <div className="notebookContain">
+        {loading && <Loading size={20} />}
+        {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
         <input
           type="text"
           placeholder="Title..."

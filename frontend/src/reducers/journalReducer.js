@@ -24,7 +24,7 @@ export const journalCreateReducer = (state = {}, action) => {
     case JOURNAL_CREATE_REQUEST:
       return { loading: true };
     case JOURNAL_CREATE_SUCCESS:
-      return { loading: false, success: true };
+      return { loading: false, success: true, journal: action.payload };
     case JOURNAL_CREATE_FAIL:
       return { loading: false, error: action.payload };
 
