@@ -8,6 +8,7 @@ import Header from "./components/Header/Header";
 import Sidebar from "./components/Sidebar/Sidebar";
 import GroupPage from "./screens/GroupPage/GroupPage";
 import AddGroup from "./screens/AddGroup/AddGroup";
+import UserProfile from "./screens/UserProfile/UserProfile";
 
 function App() {
   const userLogin = useSelector((state) => state.userLogin);
@@ -22,6 +23,7 @@ function App() {
         <Route path="/newentry" element={<NewEntry />} />
         <Route path="/mygroups/:id" element={<GroupPage />} />
         <Route path="/addgroup" element={<AddGroup />} />
+        <Route path="/profile" element={<UserProfile />} />
       </Routes>
     </BrowserRouter>
   );

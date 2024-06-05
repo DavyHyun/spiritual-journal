@@ -31,7 +31,6 @@
 .buttonsContainer {
   display: flex;
   justify-content: space-between;
-  flex-direction: row;
   width: 70%;
   margin-top: 10%;
 }
