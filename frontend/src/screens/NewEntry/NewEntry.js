@@ -40,6 +40,7 @@ const NewEntry = () => {
   // };
 
   const submitHandler = () => {
+    setShowGroups(false);
     const verse = book + " " + chapter + ":" + verses;
     dispatch(
       createJournalAction(verse, verseText, reflection, title, selectedGroups)
