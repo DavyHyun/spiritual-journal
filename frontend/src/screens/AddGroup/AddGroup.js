@@ -52,23 +52,9 @@ const AddGroup = () => {
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        flexDirection: "row",
-      }}
-    >
+    <div className="mainBigContainer">
       <Sidebar />
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          flexDirection: "column",
-          alignItems: "center",
-          flex: 0.8,
-        }}
-      >
+      <div className="createGroup">
         <div className="section">
           <p className="title">Create Group</p>
           <input
