@@ -91,3 +91,13 @@ textarea::placeholder {
   cursor: pointer;
   transform: scale(1.05);
 }
+
+.groupMenu {
+  position: absolute;
+  width: 150px;
+  margin-top: 3%;
+  border: 1px solid black;
+  background-color: white;
+  padding: 8px;
+  z-index: 999;
+}

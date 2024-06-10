@@ -1,3 +1,6 @@
+// IN PROGRESS TIM SHIM
+
+
 import React from 'react'
 
 const UserProfile = () => {
@@ -5,23 +8,25 @@ const UserProfile = () => {
   return (
     <div style={{
         display: 'flex',
-        backgroundColor: 'red',
+        // backgroundColor: 'red',
         height: '90vh',
         justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'column'
     }}>
         <div style={{
-            backgroundColor: 'blue',
-            width: '20%',
-            height: '20%',
+            display: 'flex',
+
+
         }}>
         </div>
         <div style={{
-            backgroundColor: 'black',
-            width: '20%',
-            height: '20%',
-        }}></div>
+            
+
+
+
+        }}>
+        </div>
     </div>
   )
 }

@@ -38,3 +38,17 @@
   cursor: pointer;
   transform: scale(1.05);
 }
+
+.mainBigContainer {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.createGroup {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  flex: 0.8;
+}

@@ -194,17 +194,7 @@ const NewEntry = () => {
             Add To
           </div>
           {showGroups ? (
-            <div
-              style={{
-                position: "absolute",
-                width: "150px",
-                marginTop: "3%",
-                border: "1px solid black",
-                backgroundColor: "white",
-                padding: "8px",
-                zIndex: "999",
-              }}
-            >
+            <div className="groupMenu">
               {groups.map((group) => (
                 <div
                   key={group._id}
