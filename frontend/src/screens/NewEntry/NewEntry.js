@@ -111,15 +111,7 @@ const NewEntry = () => {
           }}
         />
         {invalid ? (
-          <p
-            style={{
-              color: "red",
-              fontSize: "8px",
-              width: "88%",
-              justifyContent: "flex-start",
-              marginBottom: "-5px",
-            }}
-          >
+          <p className="invalidVerse">
             enter valid verse
           </p>
         ) : null}
@@ -127,12 +119,8 @@ const NewEntry = () => {
           <input
             type="text"
             placeholder="John"
-            style={{
-              fontSize: "20px",
-              width: "180px",
-              border: "none",
-              outline: "none",
-            }}
+            className="johnExample"
+
             onChange={(e) => {
               setBook(e.target.value);
             }}
@@ -140,34 +128,20 @@ const NewEntry = () => {
           <input
             type="text"
             placeholder="3"
-            style={{
-              fontSize: "20px",
-              width: "50px",
-              border: "none",
-              outline: "none",
-            }}
+            className="chapterExample"
+  
             onChange={(e) => {
               setChapter(e.target.value);
             }}
           />
-          <p
-            style={{
-              fontSize: "30px",
-              marginTop: "3%",
-              marginRight: "3%",
-            }}
-          >
-            :
+          <p className="setChapter">
+          
           </p>
           <input
             type="text"
             placeholder="16 - 18"
-            style={{
-              fontSize: "20px",
-              width: "100px",
-              border: "none",
-              outline: "none",
-            }}
+            className="verseExample"
+            
             onChange={(e) => {
               setVerses(e.target.value);
             }}
@@ -180,14 +154,8 @@ const NewEntry = () => {
           onChange={(e) => {
             setReflection(e.target.value);
           }}
-          style={{
-            fontSize: "15px",
-            height: "50%",
-            width: "90%",
-            outline: "none",
-            marginTop: "5%",
-            border: "none",
-          }}
+          className="reflectionContainer"
+         
         />
         <div className="submitContainer">
           <div className="addToButton" onClick={toggleGroups}>
