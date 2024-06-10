@@ -111,17 +111,12 @@ const NewEntry = () => {
             setTitle(e.target.value);
           }}
         />
-        {invalid ? (
-          <p className="invalidVerse">
-            enter valid verse
-          </p>
-        ) : null}
+        {invalid ? <p className="invalidVerse">enter valid verse</p> : null}
         <div className="versesEntry">
           <input
             type="text"
             placeholder="John"
             className="johnExample"
-
             onChange={(e) => {
               setBook(e.target.value);
             }}
@@ -130,19 +125,15 @@ const NewEntry = () => {
             type="text"
             placeholder="3"
             className="chapterExample"
-  
             onChange={(e) => {
               setChapter(e.target.value);
             }}
           />
-          <p className="setChapter">
-          
-          </p>
+          <p className="setChapter">:</p>
           <input
             type="text"
             placeholder="16 - 18"
             className="verseExample"
-            
             onChange={(e) => {
               setVerses(e.target.value);
             }}
@@ -156,7 +147,6 @@ const NewEntry = () => {
             setReflection(e.target.value);
           }}
           className="reflectionContainer"
-         
         />
         <div className="submitContainer">
           <div className="addToButton" onClick={toggleGroups}>
