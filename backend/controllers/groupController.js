@@ -80,17 +80,20 @@ const getCodes = asyncHandler(async (req, res) => {
   }
 });
 
-const leaveGroup = asyncHandler(async(req, res) =>{
-const {groupID} = req.params._id;
+const leaveGroup = asyncHandler(async (req, res) => {
+  const { groupId } = req.body;
 
-if (group.members.includes(req.user._id)) {
-  // Update the group to remove the user's ID from the members array
-  await Group.updateOne(
-    { _id: groupID }, // Find group by group ID
+  if (!groupId) {
+    res.status(400);
+    throw new Error("Group id not found.");
+  }
+
+  const returnedVal = await Group.updateOne(
+    { _id: groupId }, // Find group by group ID
     { $pull: { members: req.user._id } } // Remove the user ID from the members array
   );
+
   res.status(200).json({ message: "Left the group successfully." }); // Send success response
-}
 });
 
 module.exports = { createGroup, addToGroup, groupGet, getCodes, leaveGroup };

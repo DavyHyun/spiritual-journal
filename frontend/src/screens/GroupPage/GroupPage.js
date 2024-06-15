@@ -9,12 +9,13 @@ import Sidebar from "../../components/Sidebar/Sidebar";
 import Loading from "../../components/Loading";
 import ErrorMessage from "../../components/ErrorMessage";
 import { TiDeleteOutline } from "react-icons/ti";
-import { leaveGroup } from '../../backend/controllers/groupController';
 import {
   listGroup,
   deleteJournalAction,
   addCommentAction,
 } from "../../actions/journalActions";
+
+import { leaveGroupAction } from "../../actions/groupActions";
 
 const CommentForm = ({ journalId }) => {
   const [commentText, setCommentText] = useState("");
@@ -270,6 +271,10 @@ const GroupPage = () => {
     }
   };
 
+  const leaveGroup = () => {
+    dispatch(leaveGroupAction(id));
+    nav("/myjournal");
+  };
 
   return (
     <div
@@ -291,12 +296,11 @@ const GroupPage = () => {
           marginBottom: "5%",
         }}
       >
-        <Button variant="danger" onClick={() => leaveGroup}>
-            Leave Group
-          </Button>
-        </div>
-        <div onClick={() => setShowModal(true)} className="dateButton">
-          
+        <Button variant="danger" onClick={() => leaveGroup()}>
+          Leave Group
+        </Button>
+      </div>
+      <div onClick={() => setShowModal(true)} className="dateButton">
         <div onClick={() => setShowModal(true)} className="dateButton">
           {showAll ? "Filter" : `${formatDateMonth(selectedDate)}`}
         </div>
