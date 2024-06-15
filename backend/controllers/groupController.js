@@ -80,4 +80,17 @@ const getCodes = asyncHandler(async (req, res) => {
   }
 });
 
-module.exports = { createGroup, addToGroup, groupGet, getCodes };
+const leaveGroup = asyncHandler(async(req, res) =>{
+const {groupID} = req.params._id;
+
+if (group.members.includes(req.user._id)) {
+  // Update the group to remove the user's ID from the members array
+  await Group.updateOne(
+    { _id: groupID }, // Find group by group ID
+    { $pull: { members: req.user._id } } // Remove the user ID from the members array
+  );
+  res.status(200).json({ message: "Left the group successfully." }); // Send success response
+}
+});
+
+module.exports = { createGroup, addToGroup, groupGet, getCodes, leaveGroup };

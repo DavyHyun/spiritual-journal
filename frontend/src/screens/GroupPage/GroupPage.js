@@ -9,6 +9,7 @@ import Sidebar from "../../components/Sidebar/Sidebar";
 import Loading from "../../components/Loading";
 import ErrorMessage from "../../components/ErrorMessage";
 import { TiDeleteOutline } from "react-icons/ti";
+import { leaveGroup } from '../../backend/controllers/groupController';
 import {
   listGroup,
   deleteJournalAction,
@@ -269,6 +270,7 @@ const GroupPage = () => {
     }
   };
 
+
   return (
     <div
       style={{
@@ -289,6 +291,12 @@ const GroupPage = () => {
           marginBottom: "5%",
         }}
       >
+        <Button variant="danger" onClick={() => leaveGroup}>
+            Leave Group
+          </Button>
+        </div>
+        <div onClick={() => setShowModal(true)} className="dateButton">
+          
         <div onClick={() => setShowModal(true)} className="dateButton">
           {showAll ? "Filter" : `${formatDateMonth(selectedDate)}`}
         </div>
