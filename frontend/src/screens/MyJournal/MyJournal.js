@@ -96,10 +96,14 @@ const MyJournal = () => {
   const scrollToContent = (index) => {
     if (accordionRefs.current[index]) {
       setTimeout(() => {
-        accordionRefs.current[index].scrollIntoView({
-          behavior: "smooth",
-          block: "center",
-        });
+        try {
+          accordionRefs.current[index].scrollIntoView({
+            behavior: "smooth",
+            block: "center",
+          });
+        } catch (e) {
+          console.log("ERROR: ", e);
+        }
       }, 400);
     }
   };
