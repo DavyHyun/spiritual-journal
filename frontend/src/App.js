@@ -17,6 +17,7 @@ function App() {
   return (
     <BrowserRouter>
       {userInfo && <Header />}
+      // routes
       <Routes>
         <Route path="/" element={<LoginRegister />} />
         <Route path="/myjournal" element={<MyJournal />} />
