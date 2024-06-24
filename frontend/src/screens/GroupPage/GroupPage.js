@@ -15,7 +15,7 @@ import {
   addCommentAction,
 } from "../../actions/journalActions";
 
-import { leaveGroupAction } from "../../actions/groupActions";
+import { leaveGroupAction, groupList } from "../../actions/groupActions";
 
 const CommentForm = ({ journalId }) => {
   const [commentText, setCommentText] = useState("");
@@ -169,7 +169,9 @@ const GroupPage = () => {
   const { loading, journals, error } = journalGroup;
   const journalCreate = useSelector((state) => state.journalCreate);
   const { success: successCreate } = journalCreate;
-
+  const group = useSelector((state) => state.groupList);
+  const { groups } = group;
+  
   const commentAdd = useSelector((state) => state.addComment);
   const {
     loading: commentLoading,
@@ -271,46 +273,76 @@ const GroupPage = () => {
     }
   };
 
-  const leaveGroup = () => {
-    dispatch(leaveGroupAction(id));
-    nav("/myjournal");
+  const leaveGroup = (id) => {
+    const group = groups.find(g => g._id === id);
+    const groupName = group.groupName; // Fallback if group name is not found
+    const userResponse = window.confirm(
+      `Are you sure you want to leave group "${groupName}"?`
+    );
+    console.log(group)
+    //console.log(groupName);
+    if (userResponse) {
+      dispatch(leaveGroupAction(id));
+      dispatch(groupList());
+      nav("/myjournal");
+    } else {
+      console.log("NOT LEFT");
+    }
   };
 
   return (
     <div
+    style={{
+      display: "flex",
+      justifyContent: "center",
+      flexDirection: "row",
+    }}
+  >
+    <Sidebar />
+    <div
       style={{
         display: "flex",
-        justifyContent: "center",
-        flexDirection: "row",
-        // alignItems: "center",
+        flexDirection: "column",
+        alignItems: "center",
+        flex: 0.8,
+        marginBottom: "5%",
+        width: "100%",
       }}
     >
-      <Sidebar />
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "flex-start",
-          flexDirection: "column",
-          alignItems: "center",
-          flex: 0.8,
-          marginBottom: "5%",
-        }}
-      >
-        <Button variant="danger" onClick={() => leaveGroup()}>
-          Leave Group
-        </Button>
-      </div>
-      <div onClick={() => setShowModal(true)} className="dateButton">
-        <div onClick={() => setShowModal(true)} className="dateButton">
-          {showAll ? "Filter" : `${formatDateMonth(selectedDate)}`}
-        </div>
-        <SelectDateModal
-          show={showModal}
-          onHide={() => setShowModal(false)}
-          onApply={handleApply}
-          setShowModal={setShowModal} // Pass setShowModal as a prop
-          setShowAll={setShowAll} // Pass setShowAll as a prop
-        />
+
+  <div style={{
+  width: "75vw",
+  maxWidth: "75vw",
+  margin: "0 auto",
+  position: "relative"
+}}>
+  {/* Header */}
+  <div style={{
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%",
+    position: "relative"
+  }}>
+    <div onClick={() => setShowModal(true)} className="dateButton">
+      {showAll ? "Filter" : `${formatDateMonth(selectedDate)}`}
+    </div>
+    <div style={{ 
+      position: "absolute", 
+      right: "0",
+      top: "50%", 
+      transform: "translateY(-50%)"
+    }}>
+      <Button variant="danger" onClick={() => leaveGroup(id)}>
+        LEAVE GROUP
+      </Button>
+    </div>
+  </div>
+</div>
+   
+
+
+  
         {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
         {errorDelete && (
           <ErrorMessage variant="danger">{errorDelete}</ErrorMessage>

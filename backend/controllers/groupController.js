@@ -88,12 +88,23 @@ const leaveGroup = asyncHandler(async (req, res) => {
     throw new Error("Group id not found.");
   }
 
-  const returnedVal = await Group.updateOne(
-    { _id: groupId }, // Find group by group ID
-    { $pull: { members: req.user._id } } // Remove the user ID from the members array
+  const group = await Group.findOneAndUpdate(
+    { _id: groupId },
+    { $pull: { members: req.user._id } },
+    { new: true }
   );
+  //console.log(group);
+  if (!group) {
+    res.status(404);
+    throw new Error("Group not found.");
+  }
 
-  res.status(200).json({ message: "Left the group successfully." }); // Send success response
+  if (group.members.length === 0) {
+    await Group.deleteOne({ _id: groupId });
+    res.status(200).json({ message: "Left the group and deleted it successfully because there were no members left." });
+  } else {
+    res.status(200).json({ message: "Left the group successfully." });
+  }
 });
 
 module.exports = { createGroup, addToGroup, groupGet, getCodes, leaveGroup };

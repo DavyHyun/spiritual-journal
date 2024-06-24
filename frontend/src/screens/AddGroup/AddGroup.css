@@ -38,3 +38,9 @@
   cursor: pointer;
   transform: scale(1.05);
 }
+
+.text:hover {
+  cursor: pointer;
+  background-color: azure;
+  transform: scale(1.01);
+}
