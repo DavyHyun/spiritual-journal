@@ -14,6 +14,7 @@ function App() {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+  // browser router
   return (
     <BrowserRouter>
       {userInfo && <Header />}
