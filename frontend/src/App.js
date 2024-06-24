@@ -11,13 +11,13 @@ import AddGroup from "./screens/AddGroup/AddGroup";
 import UserProfile from "./screens/UserProfile/UserProfile";
 
 function App() {
+  // userLogin
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
   return (
     <BrowserRouter>
       {userInfo && <Header />}
-      // routes
       <Routes>
         <Route path="/" element={<LoginRegister />} />
         <Route path="/myjournal" element={<MyJournal />} />
