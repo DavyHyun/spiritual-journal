@@ -16,7 +16,7 @@ import {
   GROUP_LEAVE_FAIL,
 } from "../constants/groupConstants";
 
-const LOCAL = true;
+const LOCAL = false;
 
 export const createGroup =
   (groupName, groupCode) => async (dispatch, getState) => {
@@ -171,8 +171,6 @@ export const leaveGroupAction = (groupId) => async (dispatch, getState) => {
     }
 
     const data = await response.json();
-
-    console.log(data);
 
     dispatch({
       type: GROUP_LEAVE_SUCCESS,

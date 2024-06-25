@@ -284,8 +284,6 @@ const GroupPage = () => {
     const userResponse = window.confirm(
       `Are you sure you want to leave group "${groupName}"?`
     );
-    console.log(group)
-    //console.log(groupName);
     if (userResponse) {
       dispatch(leaveGroupAction(id));
       dispatch(groupList());
