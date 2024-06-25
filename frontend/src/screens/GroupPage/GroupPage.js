@@ -14,7 +14,7 @@ import {
   deleteJournalAction,
   addCommentAction,
 } from "../../actions/journalActions";
-import { FiLogOut, FiUserMinus} from "react-icons/fi";
+import { FiUserMinus } from "react-icons/fi";
 import { leaveGroupAction, groupList } from "../../actions/groupActions";
 import "./GroupPage.css";
 
