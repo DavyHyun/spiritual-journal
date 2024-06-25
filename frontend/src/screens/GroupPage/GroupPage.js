@@ -14,8 +14,9 @@ import {
   deleteJournalAction,
   addCommentAction,
 } from "../../actions/journalActions";
-
+import { FiLogOut, FiUserMinus} from "react-icons/fi";
 import { leaveGroupAction, groupList } from "../../actions/groupActions";
+import "./GroupPage.css";
 
 const CommentForm = ({ journalId }) => {
   const [commentText, setCommentText] = useState("");
@@ -295,56 +296,20 @@ const GroupPage = () => {
   };
 
   return (
-    <div
-    style={{
-      display: "flex",
-      justifyContent: "center",
-      flexDirection: "row",
-    }}
-  >
-    <Sidebar />
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        flex: 0.8,
-        marginBottom: "5%",
-        width: "100%",
-      }}
-    >
-
-  <div style={{
-  width: "75vw",
-  maxWidth: "75vw",
-  margin: "0 auto",
-  position: "relative"
-}}>
-  {/* Header */}
-  <div style={{
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    width: "100%",
-    position: "relative"
-  }}>
-    <div onClick={() => setShowModal(true)} className="dateButton">
-      {showAll ? "Filter" : `${formatDateMonth(selectedDate)}`}
+    <div className="group-page-container">
+      <Sidebar />
+      <div className="group-content">
+        <div className="group-header">
+          <div className="header-content">
+            <div onClick={() => setShowModal(true)} className="dateButton">
+              {showAll ? "Filter" : `${formatDateMonth(selectedDate)}`}
+            </div>
+            <div className="leave-group-icon">
+              <FiUserMinus className="icon"  onClick={() => leaveGroup(id)}/>
+            </div>
+         </div>
     </div>
-    <div style={{ 
-      position: "absolute", 
-      right: "0",
-      top: "50%", 
-      transform: "translateY(-50%)"
-    }}>
-      <Button variant="danger" onClick={() => leaveGroup(id)}>
-        LEAVE GROUP
-      </Button>
-    </div>
-  </div>
-</div>
    
-
 
   
         {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
