@@ -280,7 +280,7 @@ const GroupPage = () => {
 
   const leaveGroup = (id) => {
     const group = groups.find(g => g._id === id);
-    const groupName = group.groupName; // Fallback if group name is not found
+    const groupName = group.groupName;
     const userResponse = window.confirm(
       `Are you sure you want to leave group "${groupName}"?`
     );
