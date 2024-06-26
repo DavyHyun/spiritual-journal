@@ -10,10 +10,13 @@ import GroupPage from "./screens/GroupPage/GroupPage";
 import AddGroup from "./screens/AddGroup/AddGroup";
 import UserProfile from "./screens/UserProfile/UserProfile";
 
+// app
 function App() {
+  // userLogin
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+  // browser router
   return (
     <BrowserRouter>
       {userInfo && <Header />}
