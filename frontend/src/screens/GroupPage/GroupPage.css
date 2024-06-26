@@ -7,3 +7,51 @@
   transform: scale(1.05);
   cursor: pointer;
 }
+
+.group-page-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.group-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 0.8;
+  margin-bottom: 5%;
+  width: 100%;
+}
+
+.group-header {
+  width: 75vw;
+  max-width: 75vw;
+  margin: 0 auto;
+  position: relative;
+}
+
+.header-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  position: relative;
+}
+
+.leave-group-icon {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.icon {
+  color: #0000004D;
+  cursor: pointer;
+  font-size: 24px;
+  transition: color 0.15s ease;
+}
+
+.icon:hover {
+  color: #1a1a1a;
+}

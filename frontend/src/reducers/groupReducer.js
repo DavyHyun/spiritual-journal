@@ -11,6 +11,9 @@ import {
   GROUP_CODES_FAIL,
   GROUP_CODES_SUCCESS,
   GROUP_CODES_REQUEST,
+  GROUP_LEAVE_REQUEST,
+  GROUP_LEAVE_SUCCESS,
+  GROUP_LEAVE_FAIL,
 } from "../constants/groupConstants";
 
 export const groupCreateReducer = (state = {}, action) => {
@@ -34,6 +37,20 @@ export const groupAddReducer = (state = {}, action) => {
     case GROUP_ADD_SUCCESS:
       return { loading: false, success: true };
     case GROUP_ADD_FAIL:
+      return { loading: false, error: action.payload };
+
+    default:
+      return state;
+  }
+};
+
+export const groupLeaveReducer = (state = {}, action) => {
+  switch (action.type) {
+    case GROUP_LEAVE_REQUEST:
+      return { loading: true };
+    case GROUP_LEAVE_SUCCESS:
+      return { loading: false, success: true };
+    case GROUP_LEAVE_FAIL:
       return { loading: false, error: action.payload };
 
     default:

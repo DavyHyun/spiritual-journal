@@ -17,6 +17,7 @@ import {
   groupAddReducer,
   groupListReducer,
   groupCodesReducer,
+  groupLeaveReducer,
 } from "./reducers/groupReducer";
 import { composeWithDevTools } from "@redux-devtools/extension";
 
@@ -26,6 +27,7 @@ const reducer = combineReducers({
   journalCreate: journalCreateReducer,
   groupCreate: groupCreateReducer,
   groupAdd: groupAddReducer,
+  groupLeave: groupLeaveReducer,
   groupList: groupListReducer,
   journalPersonal: journalPersonalReducer,
   journalGroup: journalGroupReducer,
