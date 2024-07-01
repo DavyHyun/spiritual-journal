@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createJournalAction } from "../../actions/journalActions";
 import { useNavigate } from "react-router-dom";
-import { AiOutlineDown } from "react-icons/ai";
+import { AiOutlineLeft } from "react-icons/ai";
 import Loading from "../../components/Loading";
 import ErrorMessage from "../../components/ErrorMessage";
 import { groupList } from "../../actions/groupActions";
@@ -94,6 +94,10 @@ const NewEntry = () => {
     fetchVerseText();
   }, [journalCreate, book, chapter, verses, dispatch, userInfo]);
 
+  const handleBackButtonClick = () => {
+    nav("/myjournal");
+  };
+
   if (loadingG) {
     return <Loading />;
   }
@@ -103,14 +107,19 @@ const NewEntry = () => {
       <div className="notebookContain">
         {loading && <Loading size={20} />}
         {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
-        <input
-          type="text"
-          placeholder="Title..."
-          className="titleText"
-          onChange={(e) => {
-            setTitle(e.target.value);
-          }}
-        />
+
+        <div className="headerContainer">
+          <button onClick={handleBackButtonClick} className="backButton">
+            <AiOutlineLeft size={20} />
+          </button>
+          <input
+            type="text"
+            placeholder="Title..."
+            className="titleText"
+            onChange={(e) => setTitle(e.target.value)}
+          />
+        </div>
+        
         {invalid ? <p className="invalidVerse">enter valid verse</p> : null}
         <div className="versesEntry">
           <input
