@@ -5,13 +5,15 @@ import { useNavigate } from "react-router-dom";
 import {
   listPersonal,
   deleteJournalAction,
+  updateJournalGroupsAction
 } from "../../actions/journalActions";
 import { logout } from "../../actions/userActions";
 import Header from "../../components/Header/Header";
-import { TiDeleteOutline } from "react-icons/ti";
+import { TiDeleteOutline, TiPlus } from "react-icons/ti";
 import Loading from "../../components/Loading";
 import ErrorMessage from "../../components/ErrorMessage";
 import Sidebar from "../../components/Sidebar/Sidebar";
+import GroupSelectModal from "../../components/GroupSelectModal";
 import "./MyJournal.css";
 
 const SelectDateModal = ({
@@ -90,6 +92,8 @@ const MyJournal = () => {
   const [filteredJournals, setFilteredJournals] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [showAll, setShowAll] = useState(true);
+  const [showGroupModal, setShowGroupModal] = useState(false);
+  const [selectedPostId, setSelectedPostId] = useState(null);
 
   const accordionRefs = useRef([]);
 
@@ -185,6 +189,17 @@ const MyJournal = () => {
     return formattedDate;
   };
 
+  const addHandler = (id, title) => {
+    setSelectedPostId(id);
+    setShowGroupModal(true);
+  };
+
+  const handleSaveGroups = (postId, selectedGroups) => {
+    console.log("Saving groups:", selectedGroups);
+    dispatch(updateJournalGroupsAction(postId, selectedGroups));
+    setShowGroupModal(false);
+  };
+
   const deleteHandler = (id, title) => {
     const userResponse = window.confirm(
       `Are you sure you want to delete journal \"${title}\" ?`
@@ -277,6 +292,13 @@ const MyJournal = () => {
                       justifyContent: "flex-end",
                     }}
                   >
+                    <TiPlus
+                      size={20}
+                      className="plusButton"
+                      onClick={() => addHandler(note._id)}
+                      aria-label={`Add to ${note.title}`}
+                      style={{ marginRight: "10px" }} // Add some space between the icons
+                    />
                     <TiDeleteOutline
                       size={20}
                       className="deleteButton"
@@ -287,6 +309,12 @@ const MyJournal = () => {
               </Accordion.Item>
             </Accordion>
           ))}
+          <GroupSelectModal
+          show={showGroupModal}
+          onHide={() => setShowGroupModal(false)}
+          onSave={handleSaveGroups}
+          postId={selectedPostId} // Pass the selected post ID to the modal
+        />
       </div>
     </div>
   );

@@ -17,6 +17,9 @@ import {
   JOURNAL_COMMENT_REQUEST,
   JOURNAL_COMMENT_SUCCESS,
   JOURNAL_COMMENT_FAIL,
+  JOURNAL_GROUP_UPDATE_REQUEST,
+  JOURNAL_GROUP_UPDATE_SUCCESS,
+  JOURNAL_GROUP_UPDATE_FAIL,
 } from "../constants/journalConstants";
 
 const LOCAL = false;
@@ -298,6 +301,52 @@ export const addCommentAction =
           : error.message;
       dispatch({
         type: JOURNAL_COMMENT_FAIL,
+        payload: message,
+      });
+    }
+  };
+
+  export const updateJournalGroupsAction = (postId, selectedGroups) => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: JOURNAL_GROUP_UPDATE_REQUEST,
+      });
+  
+      const {
+        userLogin: { userInfo },
+      } = getState();
+  
+      const config = {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+        body: JSON.stringify({ groups: selectedGroups }),
+      };
+  
+      const response = LOCAL
+        ? await fetch(`http://localhost:3001/api/journal/${postId}/groups`, config)
+        : await fetch(`https://spiritual-journal.onrender.com/api/journal/${postId}/groups`, config);
+  
+      // Check if the response status is not in the 200-299 range
+      if (!response.ok) {
+        const errorData = await response.json(); // Assuming server responds with JSON containing the error
+        throw new Error(errorData.message || "Something went wrong");
+      }
+  
+      const data = await response.json();
+  
+      dispatch({
+        type: JOURNAL_GROUP_UPDATE_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {
+      const message = error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+      dispatch({
+        type: JOURNAL_GROUP_UPDATE_FAIL,
         payload: message,
       });
     }

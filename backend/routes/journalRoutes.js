@@ -18,5 +18,7 @@ router
   // .get(getNoteById)
   // .put(protect, updateNote)
   .delete(protect, deleteJournal);
+router.route("/:postId/groups")
+  .put(protect, updateJournalGroups);
 
 module.exports = router;
