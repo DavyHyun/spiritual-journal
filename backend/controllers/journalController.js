@@ -23,9 +23,58 @@ const createJournal = asyncHandler(async (req, res) => {
   }
 });
 
-const deleteJournal = asyncHandler(async (req, res) => {
+const updateJournal = asyncHandler(async (req, res) => {
+  console.log("Update Journal Controller called with ID:", req.params.id);
+  console.log("Request Body:", req.body);
+  console.log("Request Params:", req.params);
+  const { verse, passage, content, title, groups } = req.body;
+  
   const journal = await Journal.findById(req.params.id);
+  console.log(journal);
+  if (!journal) {
+    res.status(404);
+    throw new Error("Journal not found");
+  }
+  // if (journal.author.toString() !== req.user._id.toString()) {
+  //   res.status(401);
+  //   throw new Error("You are not authorized to edit this journal");
+  // }
 
+  // if(!verse || !passage || !content){
+  //   res.status(400);
+  //   throw new Error("Please Fill out Journal Completely");
+  // } else {
+  //   journal.verse = verse;
+  //   journal.passage = passage;
+  //   journal.content = content;
+  //   journal.title = title;
+  //   journal.groups = groups;
+
+  //   const updatedJournal = await journal.save();
+  //   res.status(201).json(updatedJournal);
+  // }
+
+  if (journal) {
+    journal.verse = verse;
+    journal.passage = passage;
+    journal.content = content;
+    journal.title = title;
+    journal.groups = groups;
+
+    const updatedJournal = await journal.save();
+    res.json(updatedJournal);
+  } else {
+    res.status(404);
+    throw new Error("Journal not found");
+  }
+});
+
+const deleteJournal = asyncHandler(async (req, res) => {
+  console.log("Delete Journal Controller called with ID:", req.params.id);
+  console.log("Request Body:", req.body);
+  console.log("Request Params:", req.params);
+  const journal = await Journal.findById(req.params.id);
+  console.log(journal);
   // console.log("USER", journal);
   if (journal.author.toString() !== req.user._id.toString()) {
     res.status(404);
@@ -94,4 +143,5 @@ module.exports = {
   getGroupJournals,
   deleteJournal,
   addComment,
+  updateJournal,
 };

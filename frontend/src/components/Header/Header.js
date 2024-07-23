@@ -23,9 +23,11 @@ const Header = () => {
     navigate("/");
   };
 
+  const hiddenPaths = ["/newentry", "/editpost"];
+
   return (
     <div>
-      {location.pathname === "/newentry" ? null : (
+      {hiddenPaths.includes(location.pathname) ? null : (
         <Navbar expand="lg">
           <Container fluid>
             <Navbar.Brand href="/myjournal" className="header">

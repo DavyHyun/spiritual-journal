@@ -13,6 +13,11 @@
   cursor: pointer;
 }
 
+.editButton:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
 .myJournalContainer {
   display: flex;
   justify-content: center;

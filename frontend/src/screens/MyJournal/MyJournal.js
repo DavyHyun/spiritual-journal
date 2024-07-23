@@ -9,6 +9,7 @@ import {
 import { logout } from "../../actions/userActions";
 import Header from "../../components/Header/Header";
 import { TiDeleteOutline } from "react-icons/ti";
+import { TiEdit } from "react-icons/ti";
 import Loading from "../../components/Loading";
 import ErrorMessage from "../../components/ErrorMessage";
 import Sidebar from "../../components/Sidebar/Sidebar";
@@ -195,6 +196,10 @@ const MyJournal = () => {
       console.log("NOT DELETED");
     }
   };
+  
+  const editHandler = (journal) => {
+    nav("/editpost", { state : { journal }});
+  }
 
   return (
     <div className="myJournalContainer">
@@ -277,6 +282,11 @@ const MyJournal = () => {
                       justifyContent: "flex-end",
                     }}
                   >
+                    <TiEdit
+                      size={20}
+                      className="editButton"
+                      onClick={() => editHandler(note)}
+                    />
                     <TiDeleteOutline
                       size={20}
                       className="deleteButton"

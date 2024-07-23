@@ -11,6 +11,7 @@ import {
   journalGroupReducer,
   journalDeleteReducer,
   addCommentReducer,
+  journalUpdateReducer,
 } from "./reducers/journalReducer";
 import {
   groupCreateReducer,
@@ -25,6 +26,7 @@ const reducer = combineReducers({
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
   journalCreate: journalCreateReducer,
+  journalUpdate: journalUpdateReducer,
   groupCreate: groupCreateReducer,
   groupAdd: groupAddReducer,
   groupLeave: groupLeaveReducer,

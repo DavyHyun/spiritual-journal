@@ -1,0 +1,148 @@
+.containerEntry {
+    background-image: url(../../misc/images/entryNotebook.png);
+    width: 100%;
+    height: calc(100vh);
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-size: 125vh;
+  }
+  
+  .notebookContain {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 400px;
+    margin-left: 90px;
+    height: 84%;
+    flex-direction: column;
+  }
+  
+  .versesEntry {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+  }
+  
+  .titleText {
+    font-size: 20px;
+    width: 80%;
+    border: none;
+    outline: none;
+    margin-right: 40px;
+    margin-bottom: 2%;
+    text-align: left;
+  }
+  
+  .verseContainer {
+    max-height: 100px;
+    width: 90%;
+    overflow-y: scroll;
+    font-size: 13px;
+  }
+  
+  input::placeholder {
+    color: #c1c1c1;
+  }
+  
+  textarea::placeholder {
+    color: #c1c1c1;
+  }
+  
+  .submitContainer {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    width: 60%;
+    margin-top: 10%;
+    margin-bottom: 7%;
+    /* background-color: blue; */
+  }
+  
+  .addToButton {
+    width: 50%;
+    border: 1px solid gray;
+    height: 37px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    font-size: 14px;
+  }
+  
+  .postButton {
+    width: 40%;
+    border: 1px solid gray;
+    height: 37px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    font-size: 14px;
+  }
+  
+  .addToButton:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+  }
+  
+  .postButton:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+  }
+  
+  .groupMenu {
+    position: absolute;
+    width: 150px;
+    margin-top: 3%;
+    border: 1px solid black;
+    background-color: white;
+    padding: 8px;
+    z-index: 999;
+  }
+  
+  .invalidVerse {
+    color: red;
+    font-size: 8px;
+    width: 88%;
+    justify-content: flex-start;
+    margin-bottom: -5px;
+  }
+  
+  .bookText {
+    font-size: 20px;
+    width: 180px;
+    border: none;
+    outline: none;
+  }
+  
+  .chapterText {
+    font-size: 20px;
+    width: 50px;
+    border: none;
+    outline: none;
+  }
+  
+  .setChapter {
+    font-size: 30px;
+    margin-top: 3%;
+    margin-right: 3%;
+  }
+  
+  .verseText {
+    font-size: 20px;
+    width: 100px;
+    border: none;
+    outline: none;
+  }
+  
+  .reflectionContainer {
+    font-size: 15px;
+    height: 50%;
+    width: 90%;
+    outline: none;
+    margin-top: 5%;
+    border: none;
+  }
+  

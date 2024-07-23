@@ -33,6 +33,20 @@ export const journalCreateReducer = (state = {}, action) => {
   }
 };
 
+export const journalUpdateReducer = (state = {}, action) => {
+  switch (action.type) {
+    case JOURNAL_UPDATE_REQUEST:
+      return { loading: true };
+    case JOURNAL_UPDATE_SUCCESS:
+      return { loading: false, success: true, journal: action.payload };
+    case JOURNAL_UPDATE_FAIL:
+      return { loading: false, error: action.payload };
+
+    default:
+      return state;
+  }
+};
+
 export const journalDeleteReducer = (state = {}, action) => {
   switch (action.type) {
     case JOURNAL_DELETE_REQUEST:

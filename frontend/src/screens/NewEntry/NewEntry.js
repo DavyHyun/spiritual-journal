@@ -44,7 +44,7 @@ const NewEntry = () => {
     const verse = book + " " + chapter + ":" + verses;
     dispatch(
       createJournalAction(verse, verseText, reflection, title, selectedGroups)
-    );
+    );                    
   };
 
   const handleGroupSelect = (groupId) => {
@@ -132,7 +132,7 @@ const NewEntry = () => {
           <p className="setChapter">:</p>
           <input
             type="text"
-            placeholder="16 - 18"
+            placeholder="16-18"
             className="verseExample"
             onChange={(e) => {
               setVerses(e.target.value);

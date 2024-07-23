@@ -9,6 +9,7 @@ import Sidebar from "./components/Sidebar/Sidebar";
 import GroupPage from "./screens/GroupPage/GroupPage";
 import AddGroup from "./screens/AddGroup/AddGroup";
 import UserProfile from "./screens/UserProfile/UserProfile";
+import EditPost from "./screens/EditPost/EditPost";
 
 // app
 function App() {
@@ -27,6 +28,7 @@ function App() {
         <Route path="/mygroups/:id" element={<GroupPage />} />
         <Route path="/addgroup" element={<AddGroup />} />
         <Route path="/profile" element={<UserProfile />} />
+        <Route path="/editpost" element={<EditPost />} />
       </Routes>
     </BrowserRouter>
   );
