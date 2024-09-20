@@ -1,5 +1,4 @@
 # Welcome to My Spiritual Journal Github!
 
-Join our community!
+Join our [community](mydevojournal.com)!
 
-[mydevojournal.com](mydevojournal.com)
