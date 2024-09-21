@@ -14,6 +14,9 @@ import {
   deleteJournalAction,
   addCommentAction,
 } from "../../actions/journalActions";
+import { FiUserMinus } from "react-icons/fi";
+import { leaveGroupAction, groupList } from "../../actions/groupActions";
+import "./GroupPage.css";
 
 const CommentForm = ({ journalId }) => {
   const [commentText, setCommentText] = useState("");
@@ -171,7 +174,9 @@ const GroupPage = () => {
   const { loading, journals, error } = journalGroup;
   const journalCreate = useSelector((state) => state.journalCreate);
   const { success: successCreate } = journalCreate;
-
+  const group = useSelector((state) => state.groupList);
+  const { groups } = group;
+  
   const commentAdd = useSelector((state) => state.addComment);
   const {
     loading: commentLoading,
@@ -273,36 +278,38 @@ const GroupPage = () => {
     }
   };
 
+  const leaveGroup = (id) => {
+    const group = groups.find(g => g._id === id);
+    const groupName = group.groupName;
+    const userResponse = window.confirm(
+      `Are you sure you want to leave group "${groupName}"?`
+    );
+    if (userResponse) {
+      dispatch(leaveGroupAction(id));
+      dispatch(groupList());
+      nav("/myjournal");
+    } else {
+      console.log("NOT LEFT");
+    }
+  };
+
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        flexDirection: "row",
-        // alignItems: "center",
-      }}
-    >
+    <div className="group-page-container">
       <Sidebar />
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "flex-start",
-          flexDirection: "column",
-          alignItems: "center",
-          flex: 0.8,
-          marginBottom: "5%",
-        }}
-      >
-        <div onClick={() => setShowModal(true)} className="dateButton">
-          {showAll ? "Filter" : `${formatDateMonth(selectedDate)}`}
-        </div>
-        <SelectDateModal
-          show={showModal}
-          onHide={() => setShowModal(false)}
-          onApply={handleApply}
-          setShowModal={setShowModal} // Pass setShowModal as a prop
-          setShowAll={setShowAll} // Pass setShowAll as a prop
-        />
+      <div className="group-content">
+        <div className="group-header">
+          <div className="header-content">
+            <div onClick={() => setShowModal(true)} className="dateButton">
+              {showAll ? "Filter" : `${formatDateMonth(selectedDate)}`}
+            </div>
+            <div className="leave-group-icon">
+              <FiUserMinus className="icon"  onClick={() => leaveGroup(id)}/>
+            </div>
+         </div>
+    </div>
+   
+
+  
         {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
         {errorDelete && (
           <ErrorMessage variant="danger">{errorDelete}</ErrorMessage>
