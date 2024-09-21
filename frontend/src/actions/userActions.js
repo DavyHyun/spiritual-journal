@@ -23,6 +23,7 @@ export const login = (username, password) => async (dispatch) => {
         username: username,
         password: password,
       }),
+      mode: "cors",
     };
 
     var response;
@@ -78,6 +79,7 @@ export const register = (username, password) => async (dispatch) => {
         username: username,
         password: password,
       }),
+      mode: "cors",
     };
 
     var response;

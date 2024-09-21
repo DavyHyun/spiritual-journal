@@ -46,6 +46,7 @@ export const createJournalAction =
           title: title,
           groups: selectedGroups,
         }),
+        mode: "cors",
       };
       var response;
       if (LOCAL) {
@@ -149,6 +150,7 @@ export const listPersonal = () => async (dispatch, getState) => {
       headers: {
         Authorization: `Bearer ${userInfo.token}`,
       },
+      mode: "cors",
     };
     var response;
 
@@ -207,6 +209,7 @@ export const listGroup = (id) => async (dispatch, getState) => {
       body: JSON.stringify({
         groupID: id,
       }),
+      mode: "cors",
     };
     var response;
 
@@ -264,6 +267,7 @@ export const addCommentAction =
           text: text,
           journalId: journalId,
         }),
+        mode: "cors",
       };
       var response;
 

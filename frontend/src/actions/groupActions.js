@@ -36,6 +36,7 @@ export const createGroup =
           groupName: groupName,
           groupCode: groupCode,
         }),
+        mode: "cors",
       };
 
       var response;
@@ -94,6 +95,7 @@ export const addToGroup = (groupCode) => async (dispatch, getState) => {
       body: JSON.stringify({
         groupCode: groupCode,
       }),
+      mode: "cors",
     };
 
     var response;
@@ -143,6 +145,7 @@ export const groupList = () => async (dispatch, getState) => {
         "Content-Type": "application/json",
         Authorization: `Bearer ${userInfo.token}`,
       },
+      mode: "cors",
     };
 
     var response;
@@ -188,6 +191,7 @@ export const groupCodes = () => async (dispatch, getState) => {
       headers: {
         "Content-Type": "application/json",
       },
+      mode: "cors",
     };
 
     var response;
